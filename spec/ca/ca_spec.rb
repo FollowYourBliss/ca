@@ -8,7 +8,7 @@ HTML_TEXT = "<p>Lorem ipsum dolor sit amet tellus. Vestibulum ante felis, feugia
 describe :Ca do
   describe :TextAnalitics do
 
-    context "analize exemplary text with one word for English text" do
+    context "analyse exemplary text with one word for English text" do
 
       before(:all) do
         @result = Ca::TextAnalitics.analize(TEXT)
@@ -48,7 +48,7 @@ describe :Ca do
       end
     end
 
-    context "analize exemplary text with tree words in phrase for English text" do
+    context "analyse exemplary text with three words in phrase for English text" do
 
       before(:all) do
         @result = Ca::TextAnalitics.analize(TEXT, 3)
@@ -67,7 +67,7 @@ describe :Ca do
       end
     end
 
-    context "analize exemplary text with one word in phrase for Polish text" do
+    context "analyse exemplary text with one word in phrase for Polish text" do
 
       before(:all) do
         @result = Ca::TextAnalitics.analize(PL_TEXT)
@@ -85,7 +85,13 @@ describe :Ca do
         @result.length.should be > 0
       end
 
+
     end
+
+    context "analyse exemplaty text with one word in phrase for HTML text" do
+
+    end
+
   end
 
 end
