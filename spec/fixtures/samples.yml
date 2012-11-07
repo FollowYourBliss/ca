@@ -1,0 +1,15 @@
+:features:
+  :hash: "My hash"
+  :key: 2
+  :text_array:
+    - "My"
+    - "hash"
+    - "My"
+    - "hash"
+:string_html_remove:
+  :pure_html: "<strong></strong>"
+  :common_example: "<p>paproszki</p>"
+:description:
+  feel power: 2
+
+nokogiri: "<strong>Alicja to moja ukochana</strong><ul> Bardzo lubi<li>Flaki nad ranem</li> <li>jesc koty</li> <li>zapach skarpet</li></ul>Andzia też jest <b>fajna</b>"

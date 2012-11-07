@@ -15,3 +15,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 end
+
+def hard_fixtures
+  YAML.load_file(File.join(File.dirname(__FILE__), "fixtures/samples.yml"))
+end

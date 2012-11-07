@@ -20,4 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "guard-bundler"
   gem.add_development_dependency "guard-rspec"
   gem.add_development_dependency "guard-rails_best_practices"
+
+  gem.add_dependency "nokogiri"
+  gem.add_dependency "mechanize"
 end

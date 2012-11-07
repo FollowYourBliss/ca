@@ -15,15 +15,15 @@ describe :Ca do
       end
 
       it "method analize should return Hash" do
-        @result.should be_a(Hash)
+        @result.first.should be_a(Hash)
       end
 
       it "method analize should return Hash with length > 0" do
-        @result.length.should be > 0
+        @result.first.length.should be > 0
       end
 
       it "method analize shoudl return value 2 for 'Lorem' hash key" do
-        @result["Lorem"].should be(2)
+        @result.first["Lorem"].should be(2)
       end
 
     end
@@ -36,15 +36,15 @@ describe :Ca do
       end
 
       it "method analize should return Hash" do
-        @result.should be_a(Hash)
+        @result.first.should be_a Hash
       end
 
       it "method analize should return value 2 for 'Foo Bar' hash key" do
-        @result["Foo Bar"].should be(2)
+        @result.first["Foo Bar"].should be 2
       end
 
       it "method analize should return value 1 for 'a' hash key" do
-        @result["a"].should be(1)
+        @result.first["a"].should be 1
       end
     end
 
@@ -55,15 +55,15 @@ describe :Ca do
       end
 
       it "method analize should return Hash" do
-        @result.should be_a(Hash)
+        @result.first.should be_a Hash
       end
 
       it "method analize should return 2 for 'na na na'" do
-        @result["na na na"].should be(4)
+        @result.first["na na na"].should be 4
       end
 
       it "method analize should return 3 for 'na na'" do
-        @result["na na"].should be(5)
+        @result.first["na na"].should be 5
       end
     end
 
@@ -74,23 +74,20 @@ describe :Ca do
       end
 
       it "method analize should return Hash" do
-        @result.should be_a(Hash)
+        @result.first.should be_a Hash
       end
 
       it "method analize should return 1 for 'domów'" do
-        @result["domów"].should be(1)
+        @result.first["domów"].should be 1
       end
 
       it "method analize should return Hash with length > 0" do
-        @result.length.should be > 0
+        @result.first.length.should be > 0
       end
 
 
     end
 
-    context "analyse exemplaty text with one word in phrase for HTML text" do
-
-    end
 
   end
 
