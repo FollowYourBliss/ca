@@ -9,20 +9,16 @@ module Ca
                   :weights,
                   :words_count
 
+    #
     def initialize(key, value, text_as_array)
-
       @frequency = value
       @words_count = (@words_table = key.split(" ")).count
       @positions, @weights = [], []
       fill_positions(text_as_array)
-      fill_weights
     end
 
-    def add_position(position)
-      @position << position
-    end
-
-    def add_weight(weight)
+    def add_weight(weight, position)
+      @positions << position
       @weights << weight
     end
 
@@ -34,18 +30,6 @@ module Ca
       end
     end
 
-    def fill_weights
-      # p "Fill my weights"
-    end
-
   end
 end
 
-module Nokogiri
-  module HTML
-    class NodeSpecyfication
-
-
-    end
-  end
-end

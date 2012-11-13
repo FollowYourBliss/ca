@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "string_html_remove"
+require "string"
 require "spec_helper"
 
 examples = hard_fixtures[:string_html_remove]

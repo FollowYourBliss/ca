@@ -88,6 +88,19 @@ describe :Ca do
 
     end
 
+    context "phrases generation" do
+      before(:all) do
+        nokogiri_structure = Nokogiri::HTML(hard_fixtures["nokogiri"])
+        @result = Ca::TextAnalitics.phrases(hard_fixtures["nokogiri"].html_remove, 3)
+      end
+
+      it "should generate correct phreses" do
+        p "pływajace labedzie"
+        p @result
+
+      end
+    end
+
 
   end
 

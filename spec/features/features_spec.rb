@@ -1,9 +1,13 @@
 # encoding: utf-8
 require "features"
+require "description"
 require "spec_helper"
+require "node_specyfication"
 require "nokogiri"
 require "open-uri"
+require "string"
 example = hard_fixtures[:features]
+descriptions = hard_fixtures[:description]
 
 describe :Ca do
   describe :Features do
@@ -35,14 +39,21 @@ describe :Ca do
     context "nokogiri chceck" do
       before(:all) do
         @nokogiri_structure = Nokogiri::HTML(hard_fixtures["nokogiri"])
+        @nokogiri_extension = Nokogiri::HTML::NodeSpecyfication.new
+        hash, table = Ca::TextAnalitics.analize(@nokogiri_structure.text, 3)
+        @description = Ca::Description.new(hash)
       end
 
       it "should open page from yaml file" do
         @nokogiri_structure.should_not be nil
       end
 
-      it "should barking" do
-        Nokogiri::HTML::NodeSpecyfication.bark.should match "Hau"
+      it "should pass" do
+        Nokogiri::HTML::NodeSpecyfication.tag_analyzer(@nokogiri_structure, @description)
+      end
+
+      it "should " do
+
       end
 
 
