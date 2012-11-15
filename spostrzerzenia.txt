@@ -1,0 +1,11 @@
+Nokogiri, oferuje bardzo dobre funckje, ale nie są niestety dla mnie wystarczające, trzeba było stworzyć własne impelementacje rekursywnych funkcji.
+
+Rozdzielanie w przypadku użycie forbidden_words, co mną kierowało, zasady, wytłumaczenie, model klas i obiektów.
+
+
+Todo:
+zastanowić się nad singletonem od nokogiri
+rozszczelnić ścisłe połączenie miedzy metodami statycznymi nokogiri a description
+załączyć mechanize
+spełnic testy
+sample sample sample

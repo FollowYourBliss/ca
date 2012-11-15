@@ -1,15 +1,23 @@
 :features:
-  :hash: "My hash"
-  :key: 2
-  :text_array:
-    - "My"
-    - "hash"
-    - "My"
-    - "hash"
+  :weight:
+    - :li
+    - :body
+  :position: 0
+  :length: 2
 :string_html_remove:
   :pure_html: "<strong></strong>"
   :common_example: "<p>paproszki</p>"
-:description:
-  feel power: 2
 
-nokogiri: "<i><u><strong>Alicja to moja ukochana</strong><ul>Bardzo lubi<li>kawę nad ranem</li><li>jesc bezy</li><li>zapach lilii</li></ul>Andzia też jest <b>fajna</b></u></i>"
+julia_sample: "<b>Julia</b> kim jesteś"
+nokogiri: "<i><u><strong>Alicja to moja ukochana kobieta.</strong> <ul>Bardzo lubi<li>kawę nad ranem</li><li>jesc bezy</li><li>zapach lilii</li></ul>Andzia też jest <b>fajna</b></u></i>"
+
+:matching:
+  :text: "sample"
+  :tags:
+    - "li"
+    - "strong"
+
+multiple_words: |
+  Ania miala Ania Ania Ania Ania Ania <li>Jazda</li> Ania Ania Ania Ania Ania Ania Ania Ania Ania Ania
+simple_words: |
+  Sample <b>Sample</b> Sample

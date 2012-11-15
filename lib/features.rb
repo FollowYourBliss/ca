@@ -9,27 +9,25 @@ module Ca
                   :weights,
                   :words_count
 
-    #
-    def initialize(key, value, text_as_array)
-      @frequency = value
-      @words_count = (@words_table = key.split(" ")).count
-      @positions, @weights = [], []
-      fill_positions(text_as_array)
+    # Construct +weight+ is tag Array for example [:li, :strong, :u]
+    # +position+ of phrase
+    # +length+ is a phrase words number
+    def initialize(weight, position, length)
+      @frequency = 0
+      @positions = []
+      @weights = []
+      @words_count = length
+      update(weight, position)
     end
 
-    def add_weight(weight, position)
+    # Method that update informations of phrase
+    # +weight+ is a tag Array, same as initialize
+    # +position+ of phrase
+    def update(weight, position)
+      @frequency += 1
       @positions << position
       @weights << weight
     end
-
-  private
-
-    def fill_positions(text_as_array)
-      (text_as_array.length - @words_count).times do |index|
-        @positions << index if text_as_array[index...index+@words_count] == @words_table
-      end
-    end
-
   end
 end
 
