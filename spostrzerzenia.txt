@@ -9,3 +9,5 @@ rozszczelnić ścisłe połączenie miedzy metodami statycznymi nokogiri a descr
 załączyć mechanize
 spełnic testy
 sample sample sample
+
+ git clone git@git.fractalsoft.org:ca -b develop

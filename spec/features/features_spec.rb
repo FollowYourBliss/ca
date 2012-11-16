@@ -31,7 +31,7 @@ describe :Ca do
         last_frequency = @features.frequency
         @features.update("tags", 69)
         @features.frequency.should be > last_frequency
-        @features.weights.include?("tags").should be_true
+        @features.weights.last.include?("tags").should be_true
         @features.positions.include?(69).should be_true
       end
 

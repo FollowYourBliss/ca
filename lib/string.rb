@@ -26,7 +26,7 @@ class String
   #   "koko piko".nr_of_words #=> 2
   #   "Alice have got cat." #=> 4
   def nr_of_words
-    split.size
+    html_remove.split.size
   end
 
 end

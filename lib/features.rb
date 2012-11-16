@@ -7,7 +7,8 @@ module Ca
     attr_accessor :frequency,
                   :positions,
                   :weights,
-                  :words_count
+                  :words_count,
+                  :warning
 
     # Construct +weight+ is tag Array for example [:li, :strong, :u]
     # +position+ of phrase
@@ -17,6 +18,7 @@ module Ca
       @positions = []
       @weights = []
       @words_count = length
+      @warning = []
       update(weight, position)
     end
 
@@ -24,9 +26,33 @@ module Ca
     # +weight+ is a tag Array, same as initialize
     # +position+ of phrase
     def update(weight, position)
-      @frequency += 1
-      @positions << position
-      @weights << weight
+      if @positions.include? position
+        index = @positions.index position
+        @weights.at(index) << weight unless @weights.at(index).include?(weight)
+      else
+        @frequency += 1
+        @positions << position
+        @weights << [weight]
+      end
+    end
+
+    # Check if some of weigths are forbidden
+    #   long_phrase = nadrzędne
+    #   @weigths = porzędne
+    def forbidden?(long_phrase)
+      phrase_length = long_phrase.words_count
+      positions = long_phrase.positions
+      positions.each do |position|
+
+      end
+      self.class
+      # Nokogiri::HTML::NodeSpecyfication.forbidden?(weigths)
+    end
+
+    # Method mark Object as warning, we use it to select
+    # phrases as "List <li>eggs" like warned, becouse <li> is forbidden
+    def warn(bool)
+      @warning << bool
     end
   end
 end

@@ -23,20 +23,16 @@ describe :Nokogiri do
           Nokogiri::HTML::NodeSpecyfication.clean
         end
 
-        it "fill description model with informations from analyze" do
+        # it "fill description model with informations from analyze" do
 
-        end
+        # end
 
         it "should open page from yaml file" do
           @nokogiri_structure.should_not be nil
         end
 
-        it "tag_analyzer return Symbol (last tag)" do
-          Nokogiri::HTML::NodeSpecyfication.tag_analyzer(@nokogiri_structure, @description).should be_a Symbol
-        end
-
-        it "match tag to position should return String (last text)" do
-          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags], @description).should be_a String
+        it "match tag to position should return Array (last phrase)" do
+          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags], @description).should be_a Array
         end
 
       end

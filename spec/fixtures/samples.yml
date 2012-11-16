@@ -18,6 +18,8 @@ nokogiri: "<i><u><strong>Alicja to moja ukochana kobieta.</strong> <ul>Bardzo lu
     - "strong"
 
 multiple_words: |
-  Ania miala Ania Ania Ania Ania Ania <li>Jazda</li> Ania Ania Ania Ania Ania Ania Ania Ania Ania Ania
+  Ania miala Ania Ania Ania Ania Ania <b>Jazda</b> Ania Ania Ania Ania Ania Ania Ania Ania Ania Ania
 simple_words: |
-  Sample <b>Sample</b> Sample
+  Sample <div><i><b>Sample</b></i> Sample</div>
+forbidden_tags: |
+  List<ul><li>eggs</li><li><b>honey</b></li></ul>end My mum

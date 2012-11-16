@@ -32,7 +32,7 @@ module Ca
           phrases << [phrase, index]
         end
       end
-      return phrases
+      phrases
     end
 
   private
@@ -43,7 +43,7 @@ module Ca
     end
 
     def self.tokenize(text)
-      text.split.delete_if do |e|
+      text.split(separators).delete_if do |e|
         e.empty?
       end
     end
