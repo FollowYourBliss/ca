@@ -1,5 +1,4 @@
 # encoding: utf-8
-require "description"
 require "spec_helper"
 
 # Here we test all the articles
@@ -31,16 +30,16 @@ describe :Ca do
       end
 
       it "should find only 16 occurs of word 'Ania'" do
-        @multiple_description.hash[:Ania].frequency.should be 16
+        @multiple_description.hash[:ania].frequency.should be 16
       end
 
       it "position shouldn't be longer than text" do
-        @multiple_description.hash[:Ania].positions.each {|position| (position < @multiple_words.text.length).should be_true}
+        @multiple_description.hash[:ania].positions.each {|position| (position < @multiple_words.text.length).should be_true}
       end
 
       it "simple text analyze shoudl return rigth results" do
-        @simple_description.hash[:Sample].positions.should be_an Array
-        @simple_description.hash[:Sample].positions.should == [0, 1, 2]
+        @simple_description.hash[:sample].positions.should be_an Array
+        @simple_description.hash[:sample].positions.should == [0, 1, 2]
       end
 
 
@@ -59,7 +58,7 @@ describe :Ca do
       end
 
       it "should return correct positions for text outsite the forbidden tags" do
-        @description_with_forbidden.hash[:List].positions.should == [0]
+        @description_with_forbidden.hash[:list].positions.should == [0]
       end
 
       it "should add forbidden tags into tags of phrase" do
@@ -75,13 +74,39 @@ describe :Ca do
       end
 
       it "should reconize warnings phrases" do
-        @description_with_forbidden.hash[:"List eggs honey"].warning.should be_true
+        @description_with_forbidden.hash[:"list eggs honey"].warning.should be_true
       end
 
       it "should reconize fine phrases" do
-        @description_with_forbidden.hash[:"My mum"].warning.at(0).should be_false
+        @description_with_forbidden.hash[:"my mum"].any_warnings?.should be_false
+      end
+    end
+
+    context "medium length text" do
+      before(:all) do
+        medium_length_text = Nokogiri::HTML(hard_fixtures["medium_text"])
+        @description = Ca::Description.new(medium_length_text)
       end
 
+      it "should reconize warning phrases" do
+        @description.hash[:"językowej każdy"].warning.first.forbidden.should be_true
+      end
+
+      it "should bark" do
+        @description.hash[:każdy].frequency.should be 4
+      end
+
+    end
+
+    context "img tag without alt analyse" do
+      before(:all) do
+        empty_alt = Nokogiri::HTML(hard_fixtures["img_without_alt"])
+        @img_description = Ca::Description.new(empty_alt)
+      end
+
+      it "can fight" do
+        p @img_description
+      end
     end
   end
 end

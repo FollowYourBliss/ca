@@ -23,10 +23,6 @@ describe :Nokogiri do
           Nokogiri::HTML::NodeSpecyfication.clean
         end
 
-        # it "fill description model with informations from analyze" do
-
-        # end
-
         it "should open page from yaml file" do
           @nokogiri_structure.should_not be nil
         end

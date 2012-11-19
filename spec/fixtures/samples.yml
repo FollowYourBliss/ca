@@ -23,3 +23,49 @@ simple_words: |
   Sample <div><i><b>Sample</b></i> Sample</div>
 forbidden_tags: |
   List<ul><li>eggs</li><li><b>honey</b></li></ul>end My mum
+medium_text: |
+  <div class="txt"><br />
+  Ubuntu jest projektem tworzonym w oparciu o pewną społeczność. Chcemy
+  stworzyć system operacyjny i pełen zestaw pracujących pod nim aplikacji
+  składający się jedynie z wolnego oprogramowania o otwartych
+  źr&oacute;dłach. U podstaw filozofii Ubuntu leżą zatem następujące
+  zasady:
+  <ul>
+    <li>Każdy użytkownik komputera powinien m&oacute;c w
+  spos&oacute;b całkowicie wolny uruchamiać, rozpowszechniać,
+  analizować, zmieniać i ulepszać oprogramowanie, kt&oacute;rym się
+  posługuje bez konieczności ponoszenia jakichkolwiek opłat licencyjnych,</li>
+    <li>Każdy użytkownik komputera powinien mieć możliwość używania
+  oprogramowania we właściwej mu wersji językowej,</li>
+    <li>Każdy użytkownik komputera powinien m&oacute;c używać
+  dowolnego oprogramowania bez względu na swoją ewentualną
+  niepełnosprawność oraz bez względu na charakter tej niepełnosprawności.</li>
+  </ul>
+  Powyższe zasady znajdują odzwierciedlenie w oprogramowaniu,
+  kt&oacute;re tworzymy i z kt&oacute;rego budujemy naszą
+  dystrybucję. W rezultacie, licencje na kt&oacute;rych oparte jest
+  rozpowszechniane przez nas oprogramowanie zgodne są z Polityką
+  Licencyjną Ubuntu. Gdy instalujesz Ubuntu, niemal całe oprogramowanie
+  zgodne jest z Polityką Licencyjną, pracujemy zaś nad tym, aby każdy
+  program, kt&oacute;rego potrzebujesz lub będziesz potrzebował w
+  przyszłości dostępny był na licencji, kt&oacute;ra respektuje wyżej
+  wymienione wolności. W chwili obecnej jedyny wyjątek stanowią dostępne
+  w jedynie w wersjach binarnych sterowniki, bez kt&oacute;rych wiele
+  maszyn nie jest w stanie poprawnie działać. Takie pakiety umieszczamy w
+  sekcji restricted naszej dystrybucji, dzięki czemu możesz je łatwo
+  usunąć, gdy tylko nie będziesz ich potrzebował. Więcej informacji o
+  komponentach Ubuntu znajdziesz na stronie Komponenty. <br />
+  <br />
+  </div>
+
+a_href_empty: |
+  Nasze produkty <a href="sample.com">Link</a>. Odwiedź nas
+
+a_href_full: |
+  Nasze słowa kluczowe <a href="sample.com">Keywords keys</a>. Chromium
+
+img_without_alt: |
+  Mozilla <img src="img.jpg"> Firefox
+
+img_with_alt: |
+  Wesołych <img src="img.jpg" alt="Keywords keys" width=100%> Świąt

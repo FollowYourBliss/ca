@@ -4,13 +4,9 @@
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require "node_specyfication"
+
 require "ca"
-require "nokogiri"
-require "string"
-require "features"
-require "description"
-require "open-uri"
+
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

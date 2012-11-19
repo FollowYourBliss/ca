@@ -1,15 +1,15 @@
 # encoding: utf-8
-require "ca/version"
-require "features"
-require "ca"
+require "ca/features"
+
 module Ca
   class Description
-    attr_reader :hash
+    attr_reader :hash,
+                :text
 
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
     #   return counter
     def add(text, tags, counter)
-
+      text.downcase!
       TextAnalitics.phrases(text, @phrase_lenght).each do |phrase, index|
         unless phrase.empty?
           symbol = phrase.to_sym
@@ -23,20 +23,14 @@ module Ca
     end
 
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
+    # Additionaly save +nokogiri_structure+ to Object variable @text
     def initialize(nokogiri_structure, phrase_lenght = 3)
-      @hash = {}
+      @hash, @text = {}, nokogiri_structure
       @phrase_lenght = phrase_lenght
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
     end
 
-    # Method display weights of phrases
-    def inspect_weights
-      p "Inspecting weights"
-      @hash.each do |key, value|
-        p "Key: #{key}, weigths_value: #{value.weights}"
-      end
-    end
 
   private
     # Method that mark long phrases with forbidden tags as warned
@@ -45,9 +39,11 @@ module Ca
     # Than we know that any but not every single pharse if forbidden
     # Becouse if every single pharse is in forbiddent it is no problem
     def mark_warnings
+
       long_phrases.each_pair do |long_phrase, features|
         features.positions.each do |position|
           fail_counter = 0
+          warning = Warning.new
           (0...features.words_count).each do |index|
             offset = position + index
             fetch_phrases_at(offset).each_pair do |short_phrase, short_features|
@@ -55,9 +51,12 @@ module Ca
               fail_counter += 1 if Nokogiri::HTML::NodeSpecyfication.forbidden?(short_features.weights[array_index])
             end
           end
-          features.warn(fail_counter.between?(1,features.words_count))
+          warning.forbidden_tags_warning if fail_counter.between?(1,features.words_count)
+          features.warning << warning
         end
       end
+
+
     end
 
     # Method that fetch long_phrases from all phrases in @hash
