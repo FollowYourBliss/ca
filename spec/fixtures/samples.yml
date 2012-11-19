@@ -65,7 +65,7 @@ a_href_full: |
   Nasze słowa kluczowe <a href="sample.com">Keywords keys</a>. Chromium
 
 img_without_alt: |
-  Mozilla <img src="img.jpg"> Firefox
+  Mozilla <img src="img.jpg"> Firefox Mozilla <img src="img.jpg"> Firefox Mozilla <img src="img.jpg"> <a>Firefox Mozilla <img src="img.jpg"> Firefox</a>
 
 img_with_alt: |
   Wesołych <img src="img.jpg" alt="Keywords keys" width=100%> Świąt

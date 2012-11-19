@@ -3,8 +3,18 @@ require "ca/features"
 
 module Ca
   class Description
+
+  ##########################################
+  # Getters
+  ##########################################
     attr_reader :hash,
-                :text
+                :text,
+                :notyfications
+
+
+  ##########################################
+  # Object methods
+  ##########################################
 
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
     #   return counter
@@ -25,13 +35,16 @@ module Ca
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
     def initialize(nokogiri_structure, phrase_lenght = 3)
-      @hash, @text = {}, nokogiri_structure
+      @hash, @text, @notyfications = {}, nokogiri_structure, []
       @phrase_lenght = phrase_lenght
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
+      attributes_analyzer
     end
 
-
+  ##########################################
+  # Private methods
+  ##########################################
   private
     # Method that mark long phrases with forbidden tags as warned
     # We take phrase and find all his parts, to check if they aren't forbidden
@@ -75,6 +88,19 @@ module Ca
     def fetch_phrases_at(number)
       @hash.select do |key, value|
         value.positions.include? number and value.words_count==1
+      end
+    end
+
+    # Method analyze attributes and contents of each tags
+    def attributes_analyzer
+      Ca::TextAnalitics.all_nodes(text).each do |tag|
+        tag.each do |node|
+        begin
+          Ca::TextAnalitics.node_attributes_analyze(node)
+        rescue Exception => error
+          node.add_class(error.class.name)
+        end
+        end
       end
     end
 

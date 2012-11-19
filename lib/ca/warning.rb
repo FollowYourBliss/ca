@@ -1,10 +1,16 @@
 # encoding: utf-8
-
 module Ca
   class Warning
+  ##########################################
+  # Whitelist attributes
+  ##########################################
     attr_accessor :img,
                   :forbidden,
                   :link
+
+  ##########################################
+  # Object methods
+  ##########################################
 
     # Construct - get all three flags to initial values - falses
     def initialize

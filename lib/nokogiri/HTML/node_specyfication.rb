@@ -1,9 +1,13 @@
 # encoding: utf-8
 require "nokogiri"
-
+require "nokogiri/XML/node"
 module Nokogiri
   module HTML
     class NodeSpecyfication
+
+  ##########################################
+  # Class methods
+  ##########################################
 
       # Array of tags that we don't use if we out of node
       def self.forbidden_tags
@@ -63,11 +67,17 @@ module Nokogiri
           end
         end
       end
+  ##########################################
+  # Private methods
+  ##########################################
     private
+
       # Method clean counter, we must run this before we start new analyze
       def self.clean
         @@counter = 0
       end
+
+
 
     end
   end

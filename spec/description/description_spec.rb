@@ -41,10 +41,6 @@ describe :Ca do
         @simple_description.hash[:sample].positions.should be_an Array
         @simple_description.hash[:sample].positions.should == [0, 1, 2]
       end
-
-
-
-
     end
 
     context "text with forbidden tags" do
@@ -104,8 +100,8 @@ describe :Ca do
         @img_description = Ca::Description.new(empty_alt)
       end
 
-      it "can fight" do
-        p @img_description
+      it "is object of Ca::Description" do
+        @img_description.should be_a Ca::Description
       end
     end
   end
