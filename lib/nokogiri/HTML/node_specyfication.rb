@@ -3,6 +3,7 @@ require "nokogiri"
 require "nokogiri/XML/node"
 module Nokogiri
   module HTML
+    # Class Nokogiri::HTML::NodeSpecyfication
     class NodeSpecyfication
 
   ##########################################
@@ -11,7 +12,19 @@ module Nokogiri
 
       # Array of tags that we don't use if we out of node
       def self.forbidden_tags
-        [:li, :ul, :ol, :tr, :td, :th, :table, :dl, :dt, :dd, :tbody]
+        [
+          :li,
+          :ul,
+          :ol,
+          :tr,
+          :td,
+          :th,
+          :table,
+          :dl,
+          :dt,
+          :dd,
+          :tbody
+        ]
       end
 
       # Return true if any of @weigths field from Da::Features contains forbidden_tags
@@ -46,25 +59,22 @@ module Nokogiri
           clean
         end
         tag = node.name.to_sym
+        note = node.text
         if node.children.empty?
-          match_tags_to_position(node.text, tag, description)
-          @@counter += node.text.nr_of_words if node.text
-          if forbidden_tags.include? tag
-            @@counter -= node.text.nr_of_words if node
-            node.before(Nokogiri::XML::Text.new(" ", node))
-            node.after(Nokogiri::XML::Text.new(" ", node))
-          end
+          match_tags_to_position(note, tag, description)
+          @@counter += note.nr_of_words if note
         else
           node.children.each do |child|
+            child_text = child.text
             tag_analyzer(child, description, tag)
             @@counter += child.text.nr_of_words unless (child.text.nil?) or (child.name == "text")
           end
           @@counter -= node.text.nr_of_words
           match_tags_to_position(node.text, tag, description)
-          if forbidden_tags.include? tag
+        end
+        if forbidden_tags.include? tag
             node.before(Nokogiri::XML::Text.new(" ", node))
             node.after(Nokogiri::XML::Text.new(" ", node))
-          end
         end
       end
   ##########################################
@@ -76,8 +86,6 @@ module Nokogiri
       def self.clean
         @@counter = 0
       end
-
-
 
     end
   end

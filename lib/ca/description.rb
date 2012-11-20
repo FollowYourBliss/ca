@@ -1,14 +1,17 @@
 # encoding: utf-8
 
 module Ca
+  # Class Ca::Description
+  # Stores information of Text Analitics and Text that we Analyse
   class Description
 
   ##########################################
   # Getters
   ##########################################
+  # hash - hash where key is phrase and valude is his Feature Object
+  # text - text we've analysed
     attr_reader :hash,
-                :text,
-                :notyfications
+                :text
 
 
   ##########################################
@@ -16,16 +19,18 @@ module Ca
   ##########################################
 
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
+    #   fill @hash
     #   return counter
     def add(text, tags, counter)
       text.downcase!
       TextAnalitics.phrases(text, @phrase_lenght).each do |phrase, index|
+        position = counter+index
         unless phrase.empty?
           symbol = phrase.to_sym
-          if hash.key? symbol
-            hash[symbol].update(tags, counter+index)
+          if hash[symbol]
+            hash[symbol].update(tags, position)
           else
-            hash.store(symbol, Ca::Features.new(tags, counter+index, phrase.nr_of_words))
+            hash[symbol] = Ca::Features.new(tags, position, phrase.nr_of_words)
           end
         end
       end
@@ -34,7 +39,7 @@ module Ca
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
     def initialize(nokogiri_structure, phrase_lenght = 3)
-      @hash, @text, @notyfications = {}, nokogiri_structure, []
+      @hash, @text = {}, nokogiri_structure
       @phrase_lenght = phrase_lenght
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
@@ -51,19 +56,19 @@ module Ca
     # Than we know that any but not every single pharse if forbidden
     # Becouse if every single pharse is in forbiddent it is no problem
     def mark_warnings
-
       long_phrases.each_pair do |long_phrase, features|
+        words_count = features.words_count
         features.positions.each do |position|
           fail_counter = 0
           warning = Warning.new
-          (0...features.words_count).each do |index|
+          (0...words_count).each do |index|
             offset = position + index
             fetch_phrases_at(offset).each_pair do |short_phrase, short_features|
               array_index = short_features.positions.index(offset)
               fail_counter += 1 if Nokogiri::HTML::NodeSpecyfication.forbidden?(short_features.weights[array_index])
             end
           end
-          warning.forbidden_tags_warning if fail_counter.between?(1,features.words_count)
+          warning.forbidden_tags_warning if fail_counter.between?(1, words_count)
           features.warning << warning
         end
       end
@@ -92,14 +97,12 @@ module Ca
 
     # Method analyze attributes and contents of each tags
     def attributes_analyzer
-      Ca::TextAnalitics.all_nodes(text).each do |tags|
-        tags.each do |node|
+      Ca::TextAnalitics.all_nodes(text).each do |node|
           begin
             Ca::TextAnalitics.node_attributes_analyze(node)
           rescue Ca::Exceptions::TagWarnings => error
             node.add_class(error.klass)
           end
-        end
       end
 
     end

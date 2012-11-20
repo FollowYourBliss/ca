@@ -1,11 +1,13 @@
 # encoding: utf-8
 module Ca
   module Exceptions
-    # Class TagWarnings
+    # Class Ca::Exceptions::TagWarnings
+    # Parent of all Ca::Exceptions Classes
     class TagWarnings < Exception
   ##########################################
   # Getters
   ##########################################
+  # properties - here we collect all warnings symbols (in Array)
       attr_reader :properties
 
   ##########################################

@@ -2,7 +2,8 @@
 require "ca/exceptions/tag_warnings"
 module Ca
   module Exceptions
-    # Class ImgWarnings
+    # Class Ca::Exceptions::ImgWarnings
+    # Exception we throw when there is a problem with <img> tag
     class ImgWarnings < TagWarnings
     end
   end

@@ -1,5 +1,6 @@
 # encoding: utf-8
 module Ca
+  # Class Ca::TextAnalitics
   class TextAnalitics
   ##########################################
   # Class methods
@@ -39,7 +40,7 @@ module Ca
 
     # Return all nodes from Nokogiri::HTML structure
     def self.all_nodes(nokogiri_structure)
-      [nokogiri_structure.css("a"), nokogiri_structure.css("img")]
+      nokogiri_structure.css("a") + nokogiri_structure.css("img")
     end
 
     # Analyse one node - like to throw Exceptions
@@ -62,8 +63,8 @@ module Ca
     end
 
     def self.tokenize(text)
-      text.split(separators).delete_if do |e|
-        e.empty?
+      text.split(separators).delete_if do |word|
+        word.empty?
       end
     end
 

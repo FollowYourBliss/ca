@@ -1,5 +1,6 @@
 # encoding: utf-8
 module Ca
+  # Class Ca::Warning
   class Warning
   ##########################################
   # Whitelist attributes

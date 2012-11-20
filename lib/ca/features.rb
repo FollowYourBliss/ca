@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 module Ca
+  # Class Ca::Feature
+  #
   class Features
   ##########################################
   # Getters and setters

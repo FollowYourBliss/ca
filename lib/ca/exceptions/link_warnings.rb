@@ -2,7 +2,8 @@
 require "ca/exceptions/tag_warnings"
 module Ca
   module Exceptions
-    # Class LinkWarning
+    # Class Ca::Exceptions::LinkWarning
+    # Exception we throw when it is a problem with <a> tag
     class LinkWarnings < TagWarnings
     end
   end

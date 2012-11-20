@@ -11,7 +11,13 @@ describe :Ca do
       it "should store Description Object" do
         Ca::Analyse.new("Ala ma kota").description.should be_an Ca::Description
       end
-
     end
+
+    context "Vary long Lore ipsum" do
+      it "should create new Ca::Analyse Object" do
+        p Ca::Analyse.new(hard_fixtures["long_ipsum"])
+      end
+    end
+
   end
 end
