@@ -1,5 +1,4 @@
 # encoding: utf-8
-require "nokogiri"
 
 module Ca
   class Features

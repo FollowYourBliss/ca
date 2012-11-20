@@ -1,5 +1,4 @@
 # encoding: utf-8
-require "ca/features"
 
 module Ca
   class Description
@@ -93,15 +92,16 @@ module Ca
 
     # Method analyze attributes and contents of each tags
     def attributes_analyzer
-      Ca::TextAnalitics.all_nodes(text).each do |tag|
-        tag.each do |node|
-        begin
-          Ca::TextAnalitics.node_attributes_analyze(node)
-        rescue Exception => error
-          node.add_class(error.class.name)
-        end
+      Ca::TextAnalitics.all_nodes(text).each do |tags|
+        tags.each do |node|
+          begin
+            Ca::TextAnalitics.node_attributes_analyze(node)
+          rescue Ca::Exceptions::TagWarnings => error
+            node.add_class(error.klass)
+          end
         end
       end
+
     end
 
   end

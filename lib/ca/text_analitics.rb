@@ -42,12 +42,12 @@ module Ca
       [nokogiri_structure.css("a"), nokogiri_structure.css("img")]
     end
 
-    # Analyse one node - like to throw exeptions
+    # Analyse one node - like to throw Exceptions
     def self.node_attributes_analyze(node)
       case node.name
       when "a" then a_analyze(node)
       when "img" then img_analyze(node)
-      else p "Nic nie pasuje"
+      else "Nothing match"
       end
     end
 
@@ -65,14 +65,6 @@ module Ca
       text.split(separators).delete_if do |e|
         e.empty?
       end
-    end
-
-    def self.a_analyze(node)
-      raise AContentEmpty if node.children.empty?
-    end
-
-    def self.img_analyze(node)
-      raise ImgAltEmpty if node["alt"].nil?
     end
 
 

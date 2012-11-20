@@ -104,5 +104,18 @@ describe :Ca do
         @img_description.should be_a Ca::Description
       end
     end
+
+    context "a tag without content analyse" do
+      before(:all) do
+        @empty_alt = Nokogiri::HTML(hard_fixtures["img_without_alt"])
+        @img_description = Ca::Description.new(@empty_alt)
+      end
+
+      it "is object of Ca::Description" do
+        @img_description.should be_a Ca::Description
+      end
+
+
+    end
   end
 end

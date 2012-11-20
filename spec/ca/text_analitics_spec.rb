@@ -101,6 +101,26 @@ describe :Ca do
       end
     end
 
+    context "Tag a analyse" do
+      it "raise error if a content is empty" do
+        expect { Ca::TextAnalitics.node_attributes_analyze(Nokogiri::HTML("<a></a>").children.last.children.last.children.first)}.to raise_error
+      end
+
+      it "don't raise error if a content is not empty" do
+        expect { Ca::TextAnalitics.node_attributes_analyze(Nokogiri::HTML(%q{"<a href="link.com" title="title">Link</a>"}).children.last.children.last.children.first)}.to_not raise_error
+      end
+    end
+
+    context "Tag img analyse" do
+      it "raise error if a content is empty" do
+        expect { Ca::TextAnalitics.node_attributes_analyze(Nokogiri::HTML("<img>").children.last.children.last.children.first)}.to raise_error
+      end
+
+      it "don't raise error if a content is not empty" do
+        expect { Ca::TextAnalitics.node_attributes_analyze(Nokogiri::HTML(%q{<img alt="alt" src="koko" title="title">}).children.last.children.last.children.first)}.to_not raise_error
+      end
+    end
+
 
   end
 
