@@ -19,10 +19,9 @@ module Ca
 
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
     #   fill @hash
-    #   return counter
     def add(text, tags, counter)
-      text.downcase!
-      TextAnalitics.phrases(text, @phrase_lenght).each do |phrase, index|
+      phrases = TextAnalitics.phrases(text.downcase, @phrase_lenght)
+      phrases.each do |phrase, index|
         position = counter+index
         unless phrase.empty?
           symbol = phrase.to_sym
@@ -55,11 +54,11 @@ module Ca
     # Becouse if every single pharse is in forbiddent it is no problem
     def mark_warnings
       long_phrases.values.each do |features|
-        method3(features)
+        long_phrase_warning(features)
       end
     end
 
-    def method1(offset, counter)
+    def phraze_fail?(offset, counter)
       fetch_phrases_at(offset).values.each do |features|
         index = features.positions.index(offset)
         counter += 1 if Nokogiri::HTML::NodeSpecyfication.forbidden?(features.weights[index])
@@ -68,19 +67,19 @@ module Ca
     end
 
 
-    def method2(words_count, position, counter)
+    def position_fail?(words_count, position, counter)
       words_count.times do |index|
         offset = position + index
-        method1(offset, counter)
+        phraze_fail?(offset, counter)
       end
     end
 
-    def method3(features)
+    def long_phrase_warning(features)
       words_count, positions = features.words_count, features.positions
       range = 1...words_count
       positions.each do |position|
         warning, fails = Warning.new, 0
-        method2(words_count, position, fails)
+        position_fail?(words_count, position, fails)
         warning.forbid if range.include? fails
         features.warning << warning
       end
@@ -88,8 +87,9 @@ module Ca
 
     # Fetch long_phrases from all phrases in @hash
     def long_phrases
-      @hash.keep_if do |key, feature|
-        feature.words_count > 1
+      hash = @hash
+      hash.keep_if do |key, feature|
+        feature.words_count > 0
       end
     end
 
@@ -119,10 +119,9 @@ module Ca
     #   Description<Hash:nil>.create_or_update_hash("a", 1, 1, :sample) #=>  Description<Hash:sample:Feature>
     #   Description<Hash:sample:Feature>.create_or_update_hash("a", 1, 1, :sample) #=>  Description<Hash:sample:Feature>
     def create_or_update(tags, position, phrase)
-      # p "Create or update #{tags} #{position} #{phrase}"
-      symbol, words_count = phrase.to_sym, phrase.nr_of_words
-      @hash[symbol] = Ca::Features.new unless @hash.has_key? symbol
-      @hash[symbol].update(tags, position, words_count)
+      key, words_count = phrase.to_sym, phrase.nr_of_words
+      @hash[key] = Ca::Features.new unless @hash.has_key? key
+      @hash[key].update(tags, position, words_count)
     end
   end
 end

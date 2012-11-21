@@ -43,28 +43,32 @@ module Nokogiri
       # As arguments we use +text+ - String of phrase we describe
       #                     +tags+ - HTML tags for this phrase
       #                     +description+ - Ca::Description Object that we change
-      def self.match_tags_to_position(text, tags, description, counter)
-        return unless text
-        description.add(text, tags, counter) unless description.nil?
+      def self.match_tags_to_position(text, tags, description, words_count)
+        return if text.nil?
+        p "Text: #{text} Counter #{@@counter}"
+        description.add(text, tags, @@counter) unless description.nil?
       end
 
       # Analyze text with Nokogiri and his nodes, use recursion to visit all nodes
       # For every node take it text contents and tags to self.match_tags_to_position
       #   It isn't very important to get return value of this function
-      def self.tag_analyzer(node, description, tags = [], counter = 0)
+      def self.tag_analyzer(node, description, tags = [])
+        @@counter = 0 if tags.empty?
         tag = node.name.to_sym
-        text = node.text
-        children = node.children
-        has_children, words_count = children.empty?, (text ? text.nr_of_words : 0)
 
-        method1(children, description, tag, counter)
-        counter -= words_count unless has_children
-        match_tags_to_position(text, tag, description, counter)
-        counter += words_count if text and has_children
+
+        children = node.children
+        along_childrens(children, description, tag)
+        text = node.text
+        has_children, words_count = children.empty?, (text ? text.nr_of_words : 0)
+        @@counter -= words_count unless has_children
+        match_tags_to_position(text, tag, description, words_count)
+        @@counter += words_count if text and has_children
 
         if forbidden_tags.include? tag
           node.surround
         end
+
 
       end
   ##########################################
@@ -72,11 +76,11 @@ module Nokogiri
   ##########################################
     private
 
-      def self.method1(children, description, tag, counter)
-        children.each do |child|
+      def self.along_childrens(childrens, description, tag)
+        childrens.each do |child|
           subtext = child.text
-          tag_analyzer(child, description, tag, counter)
-          counter += subtext.nr_of_words unless (subtext.nil?) or (child.name == "text")
+          tag_analyzer(child, description, tag)
+          @@counter += subtext.nr_of_words unless (subtext.nil?) or (child.name == "text")
         end
       end
     end
