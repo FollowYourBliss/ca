@@ -48,6 +48,7 @@ module Ca
       case node.name
       when "a" then a_analyze(node)
       when "img" then img_analyze(node)
+      when "title" then title_analyze(node)
       else "Nothing match"
       end
     end

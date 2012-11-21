@@ -15,7 +15,7 @@ describe :Ca do
 
     context "Vary long Lore ipsum" do
       it "should create new Ca::Analyse Object" do
-        p Ca::Analyse.new(hard_fixtures["long_ipsum"])
+        Ca::Analyse.new(hard_fixtures["long_ipsum"]).should be_an Ca::Analyse
       end
     end
 
