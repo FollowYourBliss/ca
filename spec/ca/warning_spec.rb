@@ -15,7 +15,7 @@ describe :Ca do
       end
 
       it "could set forbidden tag flag and check it" do
-        @warning.forbidden_tags_warning.should be_true
+        @warning.forbid.should be_true
         @warning.forbidden.should be_true
       end
 

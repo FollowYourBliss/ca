@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 module Ca
   # Class Ca::Description
   # Stores information of Text Analitics and Text that we Analyse
@@ -27,14 +26,12 @@ module Ca
         position = counter+index
         unless phrase.empty?
           symbol = phrase.to_sym
-          if hash[symbol]
-            hash[symbol].update(tags, position)
-          else
-            hash[symbol] = Ca::Features.new(tags, position, phrase.nr_of_words)
-          end
+          create_or_update(tags, position, phrase)
         end
       end
     end
+
+
 
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
@@ -46,6 +43,7 @@ module Ca
       attributes_analyzer
     end
 
+
   ##########################################
   # Private methods
   ##########################################
@@ -56,33 +54,43 @@ module Ca
     # Than we know that any but not every single pharse if forbidden
     # Becouse if every single pharse is in forbiddent it is no problem
     def mark_warnings
-      long_phrases.each_pair do |long_phrase, features|
-        words_count = features.words_count
-        features.positions.each do |position|
-          fail_counter = 0
-          warning = Warning.new
-          (0...words_count).each do |index|
-            offset = position + index
-            fetch_phrases_at(offset).each_pair do |short_phrase, short_features|
-              array_index = short_features.positions.index(offset)
-              fail_counter += 1 if Nokogiri::HTML::NodeSpecyfication.forbidden?(short_features.weights[array_index])
-            end
-          end
-          warning.forbidden_tags_warning if fail_counter.between?(1, words_count)
-          features.warning << warning
-        end
+      long_phrases.values.each do |features|
+        method3(features)
       end
-
-
     end
 
-    # Method that fetch long_phrases from all phrases in @hash
-    def long_phrases
-      hash = {}
-      @hash.each_pair do |key,value|
-        hash.store(key, value) if value.words_count>1
+    def method1(offset, counter)
+      fetch_phrases_at(offset).values.each do |features|
+        index = features.positions.index(offset)
+        counter += 1 if Nokogiri::HTML::NodeSpecyfication.forbidden?(features.weights[index])
       end
-      hash
+      counter
+    end
+
+
+    def method2(words_count, position, counter)
+      words_count.times do |index|
+        offset = position + index
+        method1(offset, counter)
+      end
+    end
+
+    def method3(features)
+      words_count, positions = features.words_count, features.positions
+      range = 1...words_count
+      positions.each do |position|
+        warning, fails = Warning.new, 0
+        method2(words_count, position, fails)
+        warning.forbid if range.include? fails
+        features.warning << warning
+      end
+    end
+
+    # Fetch long_phrases from all phrases in @hash
+    def long_phrases
+      @hash.keep_if do |key, feature|
+        feature.words_count > 1
+      end
     end
 
 
@@ -107,5 +115,14 @@ module Ca
 
     end
 
+    # Create if don't exist key in hash or update hash if not empty
+    #   Description<Hash:nil>.create_or_update_hash("a", 1, 1, :sample) #=>  Description<Hash:sample:Feature>
+    #   Description<Hash:sample:Feature>.create_or_update_hash("a", 1, 1, :sample) #=>  Description<Hash:sample:Feature>
+    def create_or_update(tags, position, phrase)
+      # p "Create or update #{tags} #{position} #{phrase}"
+      symbol, words_count = phrase.to_sym, phrase.nr_of_words
+      @hash[symbol] = Ca::Features.new unless @hash.has_key? symbol
+      @hash[symbol].update(tags, position, words_count)
+    end
   end
 end

@@ -1,8 +1,6 @@
 # encoding: utf-8
-
 module Ca
   # Class Ca::Feature
-  #
   class Features
   ##########################################
   # Getters and setters
@@ -29,18 +27,15 @@ module Ca
     # Method mark Object as warning, we use it to select
     # phrases as "List <li>eggs" like warned, becouse <li> is forbidden
     def forbidden_warning
-      @warning.forbidden_tags_warning
+      @warning.forbidden_tags_wavaluerning
     end
 
     # Construct +weight+ is tag Array for example [:li, :strong, :u]
     # +position+ of phrase
     # +length+ is a phrase words number
     def initialize(weight, position, length)
-      @frequency = 0
-      @positions = []
-      @weights = []
-      @words_count = length
-      @warning = []
+      @frequency, @words_count = 0, length
+      @positions, @weights, @warning = [], [], []
       update(weight, position)
     end
 

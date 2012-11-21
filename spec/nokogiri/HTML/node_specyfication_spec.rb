@@ -19,16 +19,12 @@ describe :Nokogiri do
           Nokogiri::HTML::NodeSpecyfication.new
         end
 
-        it "clean method is static" do
-          Nokogiri::HTML::NodeSpecyfication.clean
-        end
-
         it "should open page from yaml file" do
           @nokogiri_structure.should_not be nil
         end
 
         it "match tag to position should return Array (last phrase)" do
-          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags], @description).should be_a Array
+          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags], @description, 0).should be_a Array
         end
 
       end

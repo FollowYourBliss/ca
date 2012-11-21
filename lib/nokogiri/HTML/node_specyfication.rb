@@ -43,50 +43,42 @@ module Nokogiri
       # As arguments we use +text+ - String of phrase we describe
       #                     +tags+ - HTML tags for this phrase
       #                     +description+ - Ca::Description Object that we change
-      def self.match_tags_to_position(text, tags, description)
-        if text.nil?
-          return
-        end
-        description.add(text, tags, @@counter) unless description.nil?
+      def self.match_tags_to_position(text, tags, description, counter)
+        return unless text
+        description.add(text, tags, counter) unless description.nil?
       end
 
       # Analyze text with Nokogiri and his nodes, use recursion to visit all nodes
       # For every node take it text contents and tags to self.match_tags_to_position
       #   It isn't very important to get return value of this function
-      def self.tag_analyzer(node, description, tags=[])
-        # Beggining of functions, when we call it without 3rd parameter
-        if tags.empty?
-          clean
-        end
+      def self.tag_analyzer(node, description, tags = [], counter = 0)
         tag = node.name.to_sym
-        note = node.text
-        if node.children.empty?
-          match_tags_to_position(note, tag, description)
-          @@counter += note.nr_of_words if note
-        else
-          node.children.each do |child|
-            child_text = child.text
-            tag_analyzer(child, description, tag)
-            @@counter += child.text.nr_of_words unless (child.text.nil?) or (child.name == "text")
-          end
-          @@counter -= node.text.nr_of_words
-          match_tags_to_position(node.text, tag, description)
-        end
+        text = node.text
+        children = node.children
+        has_children, words_count = children.empty?, (text ? text.nr_of_words : 0)
+
+        method1(children, description, tag, counter)
+        counter -= words_count unless has_children
+        match_tags_to_position(text, tag, description, counter)
+        counter += words_count if text and has_children
+
         if forbidden_tags.include? tag
-            node.before(Nokogiri::XML::Text.new(" ", node))
-            node.after(Nokogiri::XML::Text.new(" ", node))
+          node.surround
         end
+
       end
   ##########################################
   # Private methods
   ##########################################
     private
 
-      # Method clean counter, we must run this before we start new analyze
-      def self.clean
-        @@counter = 0
+      def self.method1(children, description, tag, counter)
+        children.each do |child|
+          subtext = child.text
+          tag_analyzer(child, description, tag, counter)
+          counter += subtext.nr_of_words unless (subtext.nil?) or (child.name == "text")
+        end
       end
-
     end
   end
 end

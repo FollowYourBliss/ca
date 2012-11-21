@@ -19,6 +19,7 @@ describe :Ca do
 
       it "should be able to share arguments throught accessor" do
         @description.hash.should be_a(Hash)
+        p @description
       end
 
       it "should trow exection when we want to write value into hash argument" do

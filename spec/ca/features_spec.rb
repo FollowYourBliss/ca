@@ -8,7 +8,8 @@ describe :Ca do
     context "during normal work" do
 
       before(:each) do
-        @features = Ca::Features.new(example[:weight], example[:position], example[:length])
+        @features = Ca::Features.new
+        @features.update(example[:weight], example[:position], example[:length])
       end
 
       it "should be able to share arguments throught accessor" do
@@ -29,7 +30,7 @@ describe :Ca do
 
       it "update method should change frequency field, weights field and positions field" do
         last_frequency = @features.frequency
-        @features.update("tags", 69)
+        @features.update("tags", 69, 1)
         @features.frequency.should be > last_frequency
         @features.weights.last.include?("tags").should be_true
         @features.positions.include?(69).should be_true

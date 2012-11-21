@@ -1,5 +1,4 @@
-module Nokogiri
-  module XML
+module Nokogiri::XML
     # Class Nokogiri::XML::Node
     class Node
   ##########################################
@@ -13,6 +12,12 @@ module Nokogiri
         class_attribute = self['class']
         self['class'] = (class_attribute.nil?) ? klass : (klass + " " + class_attribute)
       end
+
+      # Add spaces before and after Nokogiri::XML::Element(Node)
+      def surround
+        space = Nokogiri::XML::Text.new(" ", self)
+        self.before(space)
+        self.after(space)
+      end
     end
-  end
 end
