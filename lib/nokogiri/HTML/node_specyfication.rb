@@ -45,7 +45,6 @@ module Nokogiri
       #                     +description+ - Ca::Description Object that we change
       def self.match_tags_to_position(text, tags, description, words_count)
         return if text.nil?
-        p "Text: #{text} Counter #{@@counter}"
         description.add(text, tags, @@counter) unless description.nil?
       end
 
@@ -78,9 +77,8 @@ module Nokogiri
 
       def self.along_childrens(childrens, description, tag)
         childrens.each do |child|
-          subtext = child.text
           tag_analyzer(child, description, tag)
-          @@counter += subtext.nr_of_words unless (subtext.nil?) or (child.name == "text")
+          @@counter += child.text.nr_of_words unless (child.text.nil?) or (child.name == "text")
         end
       end
     end

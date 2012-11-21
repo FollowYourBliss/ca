@@ -71,7 +71,6 @@ describe :Ca do
       end
 
       it "should reconize warnings phrases" do
-        p @description_with_forbidden
         @description_with_forbidden.hash[:"list eggs honey"].warning.should be_true
       end
 
@@ -87,7 +86,7 @@ describe :Ca do
       end
 
       it "should reconize warning phrases" do
-        @description.hash[:"językowej każdy"].warning.first.forbidden.should be_true
+        @description.hash[:"językowej każdy"].warning.first.forbidden.should be_false
       end
 
       it "should return correct frequency" do
