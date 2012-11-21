@@ -15,9 +15,8 @@ module Nokogiri::XML
 
       # Add spaces before and after Nokogiri::XML::Element(Node)
       def surround
-        space = Nokogiri::XML::Text.new(" ", self)
-        self.before(space)
-        self.after(space)
+        self.before(Nokogiri::XML::Text.new(" ", self))
+        self.after(Nokogiri::XML::Text.new(" ", self))
       end
     end
 end

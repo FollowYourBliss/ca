@@ -27,7 +27,7 @@ module Ca
     # Method mark Object as warning, we use it to select
     # phrases as "List <li>eggs" like warned, becouse <li> is forbidden
     def forbidden_warning
-      @warning.forbidden_tags_wavaluerning
+      @warning.forbid
     end
 
     # Construct +weight+ is tag Array for example [:li, :strong, :u]

@@ -19,7 +19,6 @@ describe :Ca do
 
       it "should be able to share arguments throught accessor" do
         @description.hash.should be_a(Hash)
-        p @description
       end
 
       it "should trow exection when we want to write value into hash argument" do
@@ -56,6 +55,7 @@ describe :Ca do
 
       it "should return correct positions for text outsite the forbidden tags" do
         @description_with_forbidden.hash[:list].positions.should == [0]
+        p "Description #{@description_with_forbidden}"
       end
 
       it "should add forbidden tags into tags of phrase" do
@@ -71,6 +71,7 @@ describe :Ca do
       end
 
       it "should reconize warnings phrases" do
+        p @description_with_forbidden
         @description_with_forbidden.hash[:"list eggs honey"].warning.should be_true
       end
 
@@ -89,7 +90,7 @@ describe :Ca do
         @description.hash[:"językowej każdy"].warning.first.forbidden.should be_true
       end
 
-      it "should bark" do
+      it "should return correct frequency" do
         @description.hash[:każdy].frequency.should be 4
       end
 
