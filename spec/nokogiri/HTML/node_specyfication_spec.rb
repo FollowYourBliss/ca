@@ -24,7 +24,7 @@ describe :Nokogiri do
         end
 
         it "match tag to position should return Array (last phrase)" do
-          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags], @description, 0).should be_a Array
+          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags]).should be_a Array
         end
 
       end
