@@ -31,7 +31,7 @@ module Ca
     #   <Ca::Warning:0x00000002d03318 @img=false, @forbidden=true, @link=false>]>.forbidden_tags_warning #=> <Ca::Warning:0x00000002d03318 @img=false, @forbidden=true, @link=false>]>
     #   <Ca::Warning:0x00000002d03318 @img=false, @forbidden=false, @link=false>]>.forbidden_tags_warning #=> <Ca::Warning:0x00000002d03318 @img=false, @forbidden=true, @link=false>]>
     def forbid
-      @forbidden =   true
+      @forbidden = true
     end
 
     # Set link flag to true

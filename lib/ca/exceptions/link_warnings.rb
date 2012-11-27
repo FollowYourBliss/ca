@@ -7,7 +7,7 @@ module Ca
     class LinkWarnings < TagWarnings
     end
   end
-
+  # Class Ca::Exceptions::TextAnalitics
   class TextAnalitics
   ##########################################
   # Class methods
@@ -26,5 +26,4 @@ module Ca
       raise Ca::Exceptions::LinkWarnings.new(errors) unless errors.empty?
     end
   end
-
 end

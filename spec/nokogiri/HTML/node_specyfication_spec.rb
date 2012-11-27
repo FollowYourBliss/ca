@@ -11,7 +11,7 @@ describe :Nokogiri do
           @description = Ca::Description.new(@nokogiri_structure)
         end
 
-        it "should return table of \"forbidden\" html tags" do
+        it "should return table of 'forbidden' html tags" do
           Nokogiri::HTML::NodeSpecyfication.forbidden_tags.should be_a(Array)
         end
 
@@ -24,7 +24,11 @@ describe :Nokogiri do
         end
 
         it "match tag to position should return Array (last phrase)" do
-          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(@match_sample[:text], @match_sample[:tags]).should be_a Array
+          Nokogiri::HTML::NodeSpecyfication.match_tags_to_position(
+            @match_sample[:text],
+            @match_sample[:tags],
+            @description
+          ).should be_a Array
         end
 
       end

@@ -2,40 +2,28 @@
 module Ca
   # Class Ca::TextAnalitics
   class TextAnalitics
-  ##########################################
-  # Class methods
-  ##########################################
-    # Return result of +text+ analysis, +max_length+ is max lenght of phrase
-    #   TextAnalitics.analize("Anna have got cat") #=> {"Anna" => 1, "have" => 1, "got" => 1, "cat" => 1}, ["Anna", "have", "got", "cat"]
-    #   TextAnalitics.analize("Blue onion", 2) #=> {"Blue" => 1, "onion" => 1, "Blue onion" => 1}, ["Blue", "onion"]
-    def self.analize(text, max_length = 1)
-      result = {}
-      words = tokenize(text)
-      (0...max_length).each do |words_per_phrase|
-        (words.size - words_per_phrase).times do |index|
-          range = (index..index + words_per_phrase)
-          phrase = words[range].join(" ")
-          result[phrase] = 0 unless result.key?(phrase)
-          result[phrase] += 1
-        end
-      end
-      return result, words
-    end
-
     # Return phreses for +text+, +max_length+ is max lenght of phrase
     #   TextAnalitics.phrases("Anna have got cat") #=> ["Anna", "have", "got", "cat"]
     #   TextAnalitics.phrases("Blue onion", 2) #=> ["Blue", "onion", "Blue onion"]
     def self.phrases(text, max_length = 1)
-      phrases = []
-      words = tokenize(text)
+      phrases_array = []
+
       (0...max_length).each do |words_per_phrase|
+        loop_by_words(phrases_array, text, words_per_phrase)
+      end
+      phrases_array
+    end
+
+
+    # Iterates throught words table and fetch phrases from it and join with " "
+    # It fill phrases_array with, for example ["ania", 1], where "ania" is a phrase and 1 is position
+    def self.loop_by_words(phrases_array, text, words_per_phrase)
+        words = tokenize(text)
         (words.size - words_per_phrase).times do |index|
           range = (index..index + words_per_phrase)
           phrase = words[range].join(" ")
-          phrases << [phrase, index]
+          phrases_array << [phrase, index]
         end
-      end
-      phrases
     end
 
     # Return all nodes from Nokogiri::HTML structure
@@ -63,6 +51,7 @@ module Ca
       %r{[\s,.]+}
     end
 
+    # Create an Array from String that is splited by TextAnalitics.separators
     def self.tokenize(text)
       text.split(separators).delete_if do |word|
         word.empty?

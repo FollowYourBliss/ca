@@ -40,10 +40,11 @@ module Ca
     #   Ca::TextAnalitics([], "href", "<a href=""></a>") #=> errors = [:href_empty]
     #   Ca::TextAnalitics([:no_need], "alt", "<img>") #=> errors = [:no_need, :alt_undeclared]
     def self.attribute_check(errors, attribute, node)
-      if node[attribute].nil?
+      attri = node[attribute]
+      if attri.nil?
         errors << "#{attribute}_undeclared".to_sym
       else
-        errors << "#{attribute}_empty".to_sym if node[attribute].empty?
+        errors << "#{attribute}_empty".to_sym if attri.empty?
       end
     end
 
