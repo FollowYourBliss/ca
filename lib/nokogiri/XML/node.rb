@@ -1,4 +1,5 @@
-module Nokogiri::XML
+module Nokogiri
+  module XML
     # Class Nokogiri::XML::Node
     class Node
   ##########################################
@@ -19,4 +20,5 @@ module Nokogiri::XML
         self.after(Nokogiri::XML::Text.new(" ", self))
       end
     end
+  end
 end

@@ -1,5 +1,4 @@
 # encoding: utf-8
-require "nokogiri"
 module Nokogiri
   module HTML
     # Class Nokogiri::HTML::NodeSpecyfication
@@ -72,14 +71,14 @@ module Nokogiri
         end
       end
 
-
-      # Analyse of single node wothiut his children (in program flow children are analyzed before)
+      # Analyse of single node without his children (in program flow children are analyzed before)
       def self.single_node(node, tag, description)
         text = node.text
         has_children, words_count = node.children.empty?, (text ? text.nr_of_words : 0)
         @@counter -= words_count unless has_children
         match_tags_to_position(text, tag, description)
         @@counter += words_count if text and has_children
+        Ca::NodeCounter.instance.increment
       end
 
     end

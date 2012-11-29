@@ -31,19 +31,34 @@ module Ca
 
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
-    def initialize(nokogiri_structure, phrase_lenght = 3)
+    def initialize(nokogiri_structure, phrase_lenght = Ca::Configuration.instance.phrase_length)
       @hash, @text = {}, nokogiri_structure
       @phrase_lenght = phrase_lenght
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
       attributes_analyzer
+      Ca::NodeCounter.instance.reset
+      sort_by(:frequency)
     end
 
   ##########################################
   # Private methods
   ##########################################
   private
+    ##########################################
+    # Class Private methods
+    ##########################################
+    # Anazyse array - if it have got all elements the same return false, becouse that isn't phrase with forbidden tags
+    # return true if any of element isn't same as others
+    #   Ca::Description.result_anayse([{li: 5}, {li: 5}]) #=> false
+    #   Ca::Description.result_anayse([{li: 5, ol: 1}, {li: 5, ol: 5}]) #=> true
+    def self.result_analyse(array)
+      array.count(array.first)!=array.size
+    end
 
+    ##########################################
+    # Object Private methods
+    ##########################################
     # Method analyze attributes and contents of each tags
     def attributes_analyzer
       Ca::TextAnalitics.all_nodes(text).each do |node|
@@ -53,7 +68,6 @@ module Ca
             node.add_class(error.klass)
           end
       end
-
     end
 
     # Create if don't exist key in hash or update hash if not empty
@@ -74,12 +88,13 @@ module Ca
       end
     end
 
-    # Fetch long phrases from all phrases in @hash
-    # Long phrases have got words_count > 0
-    def long_phrases
-      hash = @hash
-      hash.keep_if do |key, feature|
-        feature.words_count > 0
+    # Add warning class to every phrase, fill it if we have got any warning
+    # Check every position in position hash
+    def long_phrase_warning(feature)
+      feature.positions.each do |phrase_position|
+        warning = Warning.new
+        warning.forbid if phrase_at_position_forbidden?(feature, phrase_position)
+        feature.warning << warning
       end
     end
 
@@ -88,42 +103,37 @@ module Ca
     # Than we know that any but not every single pharse if forbidden
     # Becouse if every single pharse is in forbiddent it is no problem
     def mark_warnings
-      long_phrases.values.each do |features|
-        long_phrase_warning(features)
+      @hash.values.each do |feature|
+        if feature.long?
+          long_phrase_warning(feature)
+        end
       end
     end
 
-    # Check if one word single phrase at +offset+ have got forbiddent tag in it Feature Object
-    # if do, we increment +counter+ - failcounter
-    def phraze_fail?(offset, counter)
-      fetch_phrases_at(offset).values.each do |features|
-        counter += 1 if Nokogiri::HTML::NodeSpecyfication.forbidden?(features.offset_weigths(offset))
-      end
-      counter
+    # Check if phrease at position is forbidden
+    def phrase_at_position_forbidden?(feature, phrase_position)
+      words_array = phrase_words_array(phrase_position, feature)
+      Ca::Description.result_analyse(words_array)
     end
 
-    # Add warning class to every phrase, fill it if we have got any warning
-    # Check every position in position hash
-    def long_phrase_warning(features)
-      words_count, positions = features.count_with_positions
-      positions.each do |position|
-        fails, warning = position_fail?(words_count, position, 0), Warning.new
-        warning.forbid if fails.between?(1, words_count-1)
-        features.warning << warning
+    # Make array of forbidden tags in phrase by checking every word and fetch hash of forbidden tags keys
+    #   example retrun: [{li: 3, ol: 5}, {}, {ol: 6}]
+    def phrase_words_array(phrase_position, phrase_info)
+      array = []
+      phrase_info.words_count.times do |index|
+        position = phrase_position + index
+        array << fetch_phrases_at(position).values.first.fetch_forbidden_nodes(position)
       end
+      array
     end
 
-    # Check every word in phraze by his position
-    # +words_count+ - number of words in checking phrase
-    # +position+ - position of checking phrase
-    # +counter+ - fail counter, counter that increment when we are at forbidden tag
-    #  return +counter+
-    def position_fail?(words_count, position, counter)
-      words_count.times do |index|
-        offset = position + index
-        counter = phraze_fail?(offset, counter)
-      end
-      counter
+    # Sort hash by any number value from Feature Object
+    def sort_by(field)
+      @hash = Hash[
+        @hash.sort_by { |key, value|
+          -value.send(field)
+        }
+      ]
     end
   end
 end

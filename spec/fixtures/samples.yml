@@ -22,7 +22,7 @@ multiple_words: |
 simple_words: |
   Sample <div><i><b>Sample</b></i> Sample</div>
 forbidden_tags: |
-  List<ul><li>eggs</li><li><b>honey</b></li></ul>end My mum
+  List<ul><li>eggs</li><li><b>honey</b></li></ul>end My mum My mum
 medium_text: |
   <div class="txt"><br />
   Ubuntu jest projektem tworzonym w oparciu o pewną społeczność. Chcemy

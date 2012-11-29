@@ -16,14 +16,7 @@ sample sample sample
  Reek:
  dlaczego nie mogę przeprowadzieć dalszej refaktoryzacji
 
-  Ca::Description#fetch_phrases_at refers to value more than self (FeatureEnvy)
-  podczas selecta z @hash jako argument |value| - przecierz korzystamy tu z wartości pola klasy, jesst przejrzyste
-
-  Ca::Description#long_phrase_warning refers to features more than self (FeatureEnvy)
-  metoda działa na argumencie przekazanym do niego
-
-  Ca::Description#phraze_fail? refers to features more than self (FeatureEnvy)
-  feature zmienna petli
+Ca::Description#long_phrase_warning refers to features more than self (FeatureEnvy)
 
 
 

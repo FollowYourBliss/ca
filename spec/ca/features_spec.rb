@@ -6,7 +6,6 @@ descriptions = hard_fixtures[:description]
 describe :Ca do
   describe :Features do
     context "during normal work" do
-
       before(:each) do
         @features = Ca::Features.new
         @features.update(example[:weight], example[:position], example[:length])
@@ -35,8 +34,20 @@ describe :Ca do
         @features.weights.last.include?("tags").should be_true
         @features.positions.include?(69).should be_true
       end
-
-
+    end
+    context "for example of forbidden tags" do
+      before(:all) do
+        @feature = Ca::Analyse.new("ala ma kota <ol><li>ko</li><li>ko</li><li>ko</li></ol>").description.hash[:ko]
+      end
+      it "return hash" do
+        @feature.fetch_forbidden_nodes(4).should be_a Hash
+      end
+      it "return hash filled with forbidden tags weigths with correct node_id" do
+        @feature.fetch_forbidden_nodes(4).should eql({li: 6, ol: 9})
+      end
+      it "return hash filled with forbidden tags weigths but not with correct tags" do
+        @feature.fetch_forbidden_nodes(4)[:body].should be_nil
+      end
     end
   end
 end
