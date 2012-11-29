@@ -31,7 +31,7 @@ module Ca
 
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
-    def initialize(nokogiri_structure, phrase_lenght = Ca::Configuration.instance.phrase_length)
+    def initialize(nokogiri_structure, phrase_lenght = Ca::Config.instance.phrase_length)
       @hash, @text = {}, nokogiri_structure
       @phrase_lenght = phrase_lenght
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
@@ -39,6 +39,7 @@ module Ca
       attributes_analyzer
       Ca::NodeCounter.instance.reset
       sort_by(:frequency)
+      run_tag_analyse!
     end
 
   ##########################################
@@ -134,6 +135,14 @@ module Ca
           -value.send(field)
         }
       ]
+    end
+
+
+    # Tag analyze for each feature in out @hash
+    def run_tag_analyse!
+      @hash.values.each do |feature|
+        feature.tag_value_analyser
+      end
     end
   end
 end

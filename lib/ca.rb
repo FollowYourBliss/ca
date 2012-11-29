@@ -1,11 +1,9 @@
-
-
 require "nokogiri"
 require "singleton"
 require "string"
 
 require "ca/analyse"
-require "ca/confiuration"
+require "ca/config"
 require "ca/description"
 require "ca/features"
 require "ca/node_counter"

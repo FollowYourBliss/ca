@@ -1,10 +1,10 @@
 # encoding: utf-8
 module Ca
-  # Class Ca::Configuration - Singleton
+  # Class Ca::Config - Singleton
 #################################################
 ############################### SINGLETON   CLASS
 #################################################
-  class Configuration
+  class Config
   ##########################################
   # Includes modules
   ##########################################

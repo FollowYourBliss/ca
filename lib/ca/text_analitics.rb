@@ -1,7 +1,11 @@
 # encoding: utf-8
 module Ca
   # Class Ca::TextAnalitics
+
   class TextAnalitics
+  ##########################################
+  # Class methods
+  ##########################################
     # Return phreses for +text+, +max_length+ is max lenght of phrase
     #   TextAnalitics.phrases("Anna have got cat") #=> ["Anna", "have", "got", "cat"]
     #   TextAnalitics.phrases("Blue onion", 2) #=> ["Blue", "onion", "Blue onion"]
@@ -57,8 +61,5 @@ module Ca
         word.empty?
       end
     end
-
-
   end
-
 end

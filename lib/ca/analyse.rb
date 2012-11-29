@@ -15,7 +15,7 @@ module Ca
     # Construct. Build Description Object based on +text+
     #   Ca::Analyse.new("<b>Sample</b>")
     #   Ca::Analyse.new("<br/>Nothing to loose<br/>")
-    def initialize(text, phrase_length = Ca::Configuration.instance.phrase_length)
+    def initialize(text, phrase_length = Ca::Config.instance.phrase_length)
       nokogiri_stucture = Nokogiri::HTML(text)
       @description = Ca::Description.new(nokogiri_stucture, phrase_length)
       self

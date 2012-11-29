@@ -10,7 +10,9 @@ module Ca
                   :weights,
                   :words_count,
                   :warning,
-                  :node_id
+                  :node_id,
+                  :values,
+                  :value
 
   ##########################################
   # Object methods
@@ -54,8 +56,8 @@ module Ca
     # +position+ of phrase
     # +length+ is a phrase words number
     def initialize
-      @frequency = 0
-      @positions, @weights, @warning, @node_id = [], [], [], []
+      @frequency, @value = 0, 0
+      @positions, @weights, @warning, @node_id, @values = [], [], [], [], []
     end
 
     # Return true if words_count if greater than 1
@@ -87,6 +89,15 @@ module Ca
       @words_count = length
     end
 
+    # Fill all values in @values
+    def tag_value_analyser
+      @positions.each_index do |index|
+        points = count_points(@weights[index])
+        @values[index] = points
+        @value += points
+      end
+    end
+
   private
   ##########################################
   # Private methods
@@ -98,6 +109,16 @@ module Ca
       Hash[@weights[index].zip(@node_id[index])]
     end
 
+    # Count number of points for weights from Object
+    def count_points(weights_array)
+      points = 0
+      tags_strength = Ca::Config.instance.tags_strength
+      common = tags_strength.keys & weights_array
+      common.each do |key|
+        points += tags_strength[key]
+      end
+      points
+    end
   end
 end
 
