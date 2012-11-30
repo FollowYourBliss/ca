@@ -16,6 +16,7 @@ module Ca
                   :position_values,
                   :occurrence
 
+                  # occurrence - percentage use in text
   ##########################################
   # Object methods
   ##########################################
@@ -75,6 +76,13 @@ module Ca
       @weights[index]
     end
 
+    # Analyse position of phrases in context of whole text
+    def position_analyse(last_index)
+      result_table = Ca::Features.intend_distances(@positions.sort)
+      # p "Pozycje #{@positions} tabela wyników #{result_table}"
+    end
+
+
     # Return self if @position include +position+
     def single_word_at(position)
       return self if @positions.include? position and @words_count==1
@@ -121,6 +129,16 @@ module Ca
         points += tags_strength[key]
       end
       points
+    end
+
+    # Intend distances by table elements
+    def self.intend_distances(positions)
+      array = []
+      nr_of_elements = positions.length - 1
+      nr_of_elements.times do |index|
+        array << positions[index+1] - positions[index]
+      end
+      array
     end
   end
 end

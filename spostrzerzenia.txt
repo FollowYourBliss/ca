@@ -13,17 +13,5 @@ sample sample sample
  git clone git@git.fractalsoft.org:ca -b develop
 
 
- Reek:
- dlaczego nie mogę przeprowadzieć dalszej refaktoryzacji
 
-Ca::Description#long_phrase_warning refers to features more than self (FeatureEnvy)
-
-
-
-
-  Nokogiri::HTML::NodeSpecyfication declares the class variable @@counter (ClassVariable)
-  skoro jest to czemu z tego nie korzystać
-
-
-
-usuniecie komentarzy htmlowskich
+usuniecie komentarzy htmlowskich przed faza analizy

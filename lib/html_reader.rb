@@ -22,6 +22,6 @@ include Singleton
   end
   # Load HTML file and resturn string table
   def fixtures(url)
-    File.read("spec/fixtures/#{url}.html")
+    IO.read("spec/fixtures/#{url}.html")
   end
 end

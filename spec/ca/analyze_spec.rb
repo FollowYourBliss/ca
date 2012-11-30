@@ -44,8 +44,15 @@ describe :Ca do
       end
 
       it "isn't empty Object" do
-        @analyse.description.display_keys
         @analyse.should_not be_false
+      end
+
+      it "hash has be like" do
+        hash = @analyse.description.hash
+        @analyse.description.display_keys
+        hash[:"of best"].frequency.should be 1
+        hash[:"applications rails"].weights.should equal [[:p, :div, :body, :html, :document]]
+        hash[:see].frequency.should be 1
       end
 
     end

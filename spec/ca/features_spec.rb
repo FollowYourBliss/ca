@@ -58,5 +58,8 @@ describe :Ca do
         @feature.occurrence.should be_a Float
       end
     end
+
+
+
   end
 end

@@ -1,6 +1,6 @@
 # encoding: utf-8
 module Ca
-  # Class Ca::Anazyse
+  # Class Ca::Anazlyse
   # Main gem Class, run most important commands
   class Analyse
 

@@ -5,6 +5,14 @@ class String
   # Object methods
   ##########################################
 
+  # Add to String +additional+ String Object if not include in it
+  #   "Alice have got cat".add_if_not_include("cat") #=> "Alice have got cat"
+  #   "Alice have got cat".add_if_not_include(" and dog") #=> "Alice have got cat and dog"
+  def add_if_not_include(additional)
+    return self + additional unless self.include? additional
+    return self
+  end
+
   # Return String without HTML tags
   #   "<b>sample</b>".html_remove #=> "sample"
   #   "<a href='www.google.com'>Link</a>" #=> "Link"
@@ -33,14 +41,8 @@ class String
     html_remove.split.size
   end
 
-
-  # Add to String +additional+ String Object if not include in it
-  #   "Alice have got cat".add_if_not_include("cat") #=> "Alice have got cat"
-  #   "Alice have got cat".add_if_not_include(" and dog") #=> "Alice have got cat and dog"
-  def add_if_not_include(additional)
-    return self + additional unless self.include? additional
-    return self
+  # Change encoding from any to utf-8, must be declarated in argument
+  def to_utf8(encoding = "utf-8")
+    force_encoding(encoding).encode("utf-8", replace: nil)
   end
-
-
 end
