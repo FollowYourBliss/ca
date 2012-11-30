@@ -1,6 +1,7 @@
 require "nokogiri"
 require "singleton"
 require "string"
+require "html_reader"
 
 require "ca/analyse"
 require "ca/config"

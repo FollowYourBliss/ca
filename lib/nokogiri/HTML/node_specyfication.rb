@@ -55,6 +55,7 @@ module Nokogiri
         along_childrens(node.children, description, tag)
         single_node(node, tag, description)
         node.surround if forbidden_tags.include? tag
+        node.eliminate_br if node.name=="br"
       end
   ##########################################
   # Private methods

@@ -23,3 +23,7 @@ Ca::Description#long_phrase_warning refers to features more than self (FeatureEn
 
   Nokogiri::HTML::NodeSpecyfication declares the class variable @@counter (ClassVariable)
   skoro jest to czemu z tego nie korzystać
+
+
+
+usuniecie komentarzy htmlowskich

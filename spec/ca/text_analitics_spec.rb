@@ -16,7 +16,6 @@ describe :Ca do
 
       it "should generate correct phreses" do
         @result.should be_true
-
       end
     end
 

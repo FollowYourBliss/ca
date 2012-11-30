@@ -16,6 +16,7 @@ module Ca
   # Object methods
   ##########################################
 
+
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
     #   fill @hash
     def add(text, tags, counter)
@@ -26,6 +27,13 @@ module Ca
           symbol = phrase.to_sym
           create_or_update(tags, position, phrase)
         end
+      end
+    end
+
+    # Debugging function to display all keys
+    def display_keys
+      @hash.each do |key, value|
+        p "Key #{key} positions #{value.positions} tags #{value.weights}"
       end
     end
 

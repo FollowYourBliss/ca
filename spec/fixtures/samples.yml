@@ -77,3 +77,105 @@ long_ipsum: |
   Nullam a nulla nec massa rutrum sodales. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque libero turpis, aliquet feugiat placerat id, pellentesque sed libero. Phasellus scelerisque elit dictum enim dictum vel malesuada nisl pharetra. Nullam sollicitudin, mauris at interdum commodo, elit tellus semper lacus, at pulvinar nibh turpis nec elit. Sed vitae tincidunt magna. Cras tortor turpis, condimentum porttitor pharetra blandit, laoreet eget purus. Morbi tristique, dui non eleifend sollicitudin, mi est tincidunt eros, in tincidunt arcu lorem vel ante. Donec sit amet diam id orci bibendum commodo. Cras consectetur lorem vel dolor elementum congue. Maecenas quis leo justo. Maecenas nec arcu erat. Morbi congue purus id mauris fringilla tempor. Ut in mauris sit amet purus vehicula lobortis sed non dolor.
   Nulla augue felis, laoreet eget adipiscing non, porta sed nisl. Suspendisse vitae tortor eu augue rhoncus dapibus sed nec mauris. Cras dictum euismod dui, ut sodales nunc faucibus et. Praesent non neque nec leo vestibulum vehicula vel eu odio. Pellentesque vulputate pellentesque felis sed adipiscing. Aliquam sed odio at nisl dictum fermentum eu in sapien. Nunc suscipit adipiscing dictum. Duis vel ipsum justo, vel ullamcorper diam.
   Maecenas viverra, sem et sollicitudin faucibus, risus metus malesuada libero, in imperdiet justo massa sed diam. Suspendisse quis dui tellus. Etiam quam ante, sodales vel mollis et, pretium nec lectus. Aenean commodo mauris sit amet odio blandit venenatis. Maecenas vitae ante ac lectus bibendum accumsan in luctus mi. Quisque nec felis tellus. Nam sit amet enim vestibulum lectus convallis vulputate id sed elit. Nunc dictum rhoncus quam, quis ornare ipsum facilisis ut. Aliquam commodo lectus nec nisi tincidunt at dapibus elit malesuada. Nullam nisi tortor, dapibus sed hendrerit sed, venenatis sit amet est. Pellentesque accumsan sollicitudin ultrices. Nam vel purus arcu, quis scelerisque ante. Mauris vel libero nunc.
+
+ubuntu_article: |
+  <div class="row row-box">
+    <div class="row">
+      <div class="six-col">
+        <h2 id="more-bang-for-your-buck">More bang for your buck</h2>
+        <h3>No hidden costs, no lock-in</h3>
+        <p>Ubuntu is used as a desktop operating system by thousands of businesses on millions of desktops around the world.</p>
+        <p>Looking to escape the cycle of endless Windows upgrades? Now, there's a real alternative. No licence fees. No subscription costs. With Ubuntu, you can scale your desktop infrastructure without scaling the expense.</p>
+        <p>And Ubuntu is naturally free of viruses, so there's no need for expensive anti-virus software, and you can save on all the costs of maintenance associated with malware on Windows.</p>
+      </div>
+      <div class="six-col last-col">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">What's included?</th>
+              <th scope="col">Ubuntu</th>
+              <th scope="col">Windows 7</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" rowspan="1">Personal productivity suite</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td><img src="/static/u/img/patterns/greytick.png" width="16" height="16" alt="No" /></td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">Antivirus</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td><img src="/static/u/img/patterns/greytick.png" width="16" height="16" alt="No" /></td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">Personal security/Firewall</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td>Basic</td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">Archiving/Compression software</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td>Basic</td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">PDF reader</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td><img src="/static/u/img/patterns/greytick.png" width="16" height="16" alt="No" /></td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">Browser options</th>
+              <td>Multiple choice</td>
+              <td>Single choice</td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">Instant messaging</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td><img src="/static/u/img/patterns/greytick.png" width="16" height="16" alt="No" /></td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="1">Backup software</th>
+              <td><img src="/static/u/img/patterns/purpletick.gif" width="16" height="16" alt="Yes" /></td>
+              <td>Basic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <p class="link-top"><a href="#">Back to top</a></p>
+      <img class="left" src="/static/u/img/business/screenshot-desktop-release-600x425.png" width="600" height="425" alt="" />
+
+      <h2 id="a-release-schedule-you-can-depend-on">A release schedule you can depend on</h2>
+      <h3>Stay up-to-date with free and regular updates and upgrades</h3>
+      <p>Every business is different. That's why we provide two upgrade paths.</p>
+      <p>Standard releases every six months help you stay up-to-date with the very latest technologies.</p>
+      <p>Long-term support (LTS) releases,  supported for <strong>five years</strong>, are perfect if you're looking for more stability over a longer period of time.</p>
+    </div>
+
+    <div class="twelve-col clearfix">
+      <div class="box box-feature-list">
+      <h3 id="works-with-your-hardware-and-software">Works with all your hardware and software</h3>
+      <div>
+        <div class="six-col border">
+          <ul class="inline inline-icons certified-hardware">
+            <li><img src="/static/u/img/third-party-logos/logo-lenovo-108x45.png" width="108" height="45" alt="Lenovo" /></li>
+            <li><img src="/static/u/img/third-party-logos/logo-dell-45x45.png" width="45" height="45" alt="Dell" /></li>
+            <li><img src="/static/u/img/third-party-logos/logo-toshiba-109x45.png" width="109" height="45" alt="Toshiba" /></li>
+            <li><img src="/static/u/img/third-party-logos/logo-hp-41x45.png" width="41" height="45" alt="HP" /></li>
+          </ul>
+          <p class="six-col"><a class="link-arrow" href="/certification">View all certified hardware</a></p>
+        </div>
+        <div class="six-col last-col">
+          <ul class="inline inline-icons certified-software">
+            <li><img src="/static/u/img/third-party-logos/logo-centrify-94x45.png" width="94" height="45" alt="Centrify" /></li>
+            <li><img src="/static/u/img/third-party-logos/logo-likewise-100x45.png" width="100" height="45" alt="Likewise" /></li>
+            <li><img src="/static/u/img/third-party-logos/logo-libreoffice-106x45.png" width="106" height="45" alt="LibreOffice" /></li>
+            <li><img src="/static/u/img/third-party-logos/logo-arkeia-60x45.png" width="60" height="45" alt="Arkeia" /></li>
+          </ul>
+          <p class="six-col"><a class="link-arrow" href="http://webapps.ubuntu.com/partners/certified-software">View all certified software</a></p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>

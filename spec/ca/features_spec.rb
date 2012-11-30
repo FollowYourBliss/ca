@@ -48,6 +48,15 @@ describe :Ca do
       it "return hash filled with forbidden tags weigths but not with correct tags" do
         @feature.fetch_forbidden_nodes(4)[:body].should be_nil
       end
+      it "set position value flag" do
+        @feature.position_values.should be_true
+      end
+      it "should return fixnum" do
+        @feature.position_values.should be_a Fixnum
+      end
+      it "return percentage value of occurrence in text" do
+        @feature.occurrence.should be_a Float
+      end
     end
   end
 end

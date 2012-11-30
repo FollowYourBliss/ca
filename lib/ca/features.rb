@@ -12,7 +12,9 @@ module Ca
                   :warning,
                   :node_id,
                   :values,
-                  :value
+                  :value,
+                  :position_values,
+                  :occurrence
 
   ##########################################
   # Object methods
@@ -56,7 +58,7 @@ module Ca
     # +position+ of phrase
     # +length+ is a phrase words number
     def initialize
-      @frequency, @value = 0, 0
+      @frequency, @value, @position_values, @occurrence = 0, 0, 0, 0.00
       @positions, @weights, @warning, @node_id, @values = [], [], [], [], []
     end
 
@@ -92,7 +94,7 @@ module Ca
     # Fill all values in @values
     def tag_value_analyser
       @positions.each_index do |index|
-        points = count_points(@weights[index])
+        points = Ca::Features.count_points(@weights[index])
         @values[index] = points
         @value += points
       end
@@ -110,7 +112,8 @@ module Ca
     end
 
     # Count number of points for weights from Object
-    def count_points(weights_array)
+    #   Ca::Features.count_points([:tr, :b, :li]) #=> Fixnum
+    def self.count_points(weights_array)
       points = 0
       tags_strength = Ca::Config.instance.tags_strength
       common = tags_strength.keys & weights_array

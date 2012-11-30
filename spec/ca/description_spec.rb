@@ -50,7 +50,6 @@ describe :Ca do
       end
 
       it "should return hash named by text in forbidden tags" do
-        p @description_with_forbidden
         @description_with_forbidden.hash.has_key?(:eggs).should be_true
       end
 
@@ -87,10 +86,6 @@ describe :Ca do
       end
 
       it "should reconize warning phrases" do
-
-        # @description.hash.each do |k, v|
-        #     p "Hash: #{k} | #{v.weights} | #{v.node_id}"
-        # end
         @description.hash[:"językowej każdy"].warning.first.forbidden.should be_true
       end
 
