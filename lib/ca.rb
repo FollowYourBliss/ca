@@ -1,7 +1,11 @@
+# encoding: utf-8
 require "nokogiri"
 require "singleton"
 require "string"
 require "html_reader"
+require "open-uri"
+require "mechanize"
+require "enumerable"
 
 require "ca/analyse"
 require "ca/config"
@@ -19,4 +23,5 @@ require "ca/exceptions/tag_warnings"
 require "ca/exceptions/title_warnings"
 
 require "nokogiri/HTML/node_specyfication"
+require "nokogiri/HTML/document"
 require "nokogiri/XML/node"

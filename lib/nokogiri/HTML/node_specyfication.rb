@@ -19,19 +19,13 @@ module Nokogiri
           :table,
           :dl,
           :dt,
-          :dd,
-          :tbody
+          :dd
         ]
       end
 
       # Return true if any of @weigths field from Da::Features contains forbidden_tags
       def self.forbidden?(one_of_weigths)
         not (one_of_weigths & forbidden_tags).empty?
-      end
-
-      # In constructor we initialize same of class variables by call clean self method
-      def self.initialize
-        clean
       end
 
       # Method fill descritption Object with values from self.tag_analyzer
@@ -75,6 +69,7 @@ module Nokogiri
       # Analyse of single node without his children (in program flow children are analyzed before)
       def self.single_node(node, tag, description)
         text = node.text
+        text = text.remove_dots! if text
         has_children, words_count = node.children.empty?, (text ? text.nr_of_words : 0)
         @@counter -= words_count unless has_children
         match_tags_to_position(text, tag, description)

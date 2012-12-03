@@ -16,10 +16,12 @@ module Ca
     #   Ca::Analyse.new("<b>Sample</b>")
     #   Ca::Analyse.new("<br/>Nothing to loose<br/>")
     def initialize(text, phrase_length = Ca::Config.instance.phrase_length)
-      nokogiri_stucture = Nokogiri::HTML(text)
-      @description = Ca::Description.new(nokogiri_stucture, phrase_length)
+      nokogiri_structure = Nokogiri::HTML(text)
+      nokogiri_structure.remove_unnecessary
+      @description = Ca::Description.new(nokogiri_structure, phrase_length)
       self
     end
+
 
   end
 end

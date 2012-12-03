@@ -33,7 +33,7 @@ module Ca
     # Debugging function to display all keys
     def display_keys
       @hash.each do |key, value|
-        p "Key ******************]#{key}[************************ positions #{value.positions} tags #{value.weights}"
+        p "Key ********]#{key}[********* positions #{value.positions} tags #{value.weights} occurrence #{value.occurrence}"
       end
     end
 
@@ -46,10 +46,9 @@ module Ca
       mark_warnings
       attributes_analyzer
       Ca::NodeCounter.instance.reset
-      # TODO uncoment this
-      # sort_by(:frequency)
       run_tag_analyse!
       run_position_analyse!(text_number_of_words)
+      sort_by(:occurrence)
     end
 
   ##########################################
@@ -157,7 +156,7 @@ module Ca
 
     # Position analyse for each phrase
     def run_position_analyse!(all_words)
-      @hash.values.each do |feature|
+      @hash.each do |key, feature|
         feature.position_analyse(all_words)
       end
     end

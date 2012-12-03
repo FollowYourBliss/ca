@@ -78,8 +78,10 @@ module Ca
 
     # Analyse position of phrases in context of whole text
     def position_analyse(last_index)
-      result_table = Ca::Features.intend_distances(@positions.sort)
-      # p "Pozycje #{@positions} tabela wyników #{result_table}"
+      result_table = Ca::Features.intend_distances(@positions.sort, last_index)
+      @value += (@position_values = result_table.standard_deviation)
+      @occurrence = count_occurrence(last_index)
+      # p "Pozycje #{@positions} tabela wyników #{result_table} last index #{last_index} position values #{@position_values} occurrence: #{@occurrence}"
     end
 
 
@@ -112,6 +114,10 @@ module Ca
   ##########################################
   # Private methods
   ##########################################
+    # count percentage occurrence of phraze in text
+    def count_occurrence(last_index)
+      (@frequency.to_f * @words_count.to_f / last_index.to_f * 100.00)
+    end
     # Make hash where key is weigth value (like :li or :body) and value is node_id of his node
     # argument +position+ specify position of examinated Feature Object
     def weights_and_ids(position)
@@ -132,12 +138,14 @@ module Ca
     end
 
     # Intend distances by table elements
-    def self.intend_distances(positions)
+    def self.intend_distances(positions, last_index)
       array = []
+      array << positions.first if positions.first
       nr_of_elements = positions.length - 1
       nr_of_elements.times do |index|
         array << positions[index+1] - positions[index]
       end
+      array << last_index - positions.last
       array
     end
   end

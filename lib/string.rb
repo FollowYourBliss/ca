@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class String
   ##########################################
   # Object methods
@@ -44,5 +43,9 @@ class String
   # Change encoding from any to utf-8, must be declarated in argument
   def to_utf8(encoding = "utf-8")
     force_encoding(encoding).encode("utf-8", replace: nil)
+  end
+
+  def remove_dots!
+    split(".").join.split(",").join.split("|").join
   end
 end

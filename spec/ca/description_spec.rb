@@ -115,8 +115,6 @@ describe :Ca do
       it "is object of Ca::Description" do
         @img_description.should be_a Ca::Description
       end
-
-
     end
   end
 end

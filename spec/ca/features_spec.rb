@@ -51,15 +51,12 @@ describe :Ca do
       it "set position value flag" do
         @feature.position_values.should be_true
       end
-      it "should return fixnum" do
-        @feature.position_values.should be_a Fixnum
+      it "should return float" do
+        @feature.position_values.should be_a Float
       end
       it "return percentage value of occurrence in text" do
         @feature.occurrence.should be_a Float
       end
     end
-
-
-
   end
 end

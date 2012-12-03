@@ -15,3 +15,36 @@ sample sample sample
 
 
 usuniecie komentarzy htmlowskich przed faza analizy
+
+useragent w open pomogl rozwiazac problemy z kodowaniem? wtf w ogole - do zbadadania, ale działą
+
+nefralgiczne:
+
+
+<tr>
+  <td>
+    <img align="RIGHT" src="./another_coding_files/kula.gif" width="32" height="27" alt="* ">
+  </td>
+  <td>
+    <b>
+      <a href="http://www.poland.com/polska/">
+        Poland.com
+      </a>
+    </b>
+  </td>
+  <td>
+    <img align="RIGHT" src="./another_coding_files/kula.gif" width="32" height="27" alt="* ">
+  </td>
+  <td>
+    <b>
+      <a href="http://www.insidepoland.com.pl/">
+        Inside Poland
+      </a>
+    </b>
+  </td>
+</tr>
+
+
+to nie działa
+pomysł - zmienić kropki na brak odstępu
+wniosek - jesteś geniuszem

@@ -25,6 +25,7 @@ describe :Ca do
       end
 
       it "is an Object of Ca::Analyse" do
+
         @analyse.should be_a Ca::Analyse
       end
 
@@ -49,10 +50,23 @@ describe :Ca do
 
       it "hash has be like" do
         hash = @analyse.description.hash
-        @analyse.description.display_keys
         hash[:"of best"].frequency.should be 1
-        hash[:"applications rails"].weights.should equal [[:p, :div, :body, :html, :document]]
+        hash[:"applications rails"].weights.first.should eq [:p, :div, :body, :html, :document]
         hash[:see].frequency.should be 1
+      end
+
+    end
+
+    context "another encoding" do
+      before(:all) do
+        @analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("another_coding"))
+      end
+
+      it "can interpret another encoding" do
+        @analyse.description.display_keys
+        hash = @analyse.description.hash
+        hash[:"wydział fizyki"].should_not be nil
+        hash[:"zaprzestał prowadzenia własnej"].frequency.should be 1
       end
 
     end

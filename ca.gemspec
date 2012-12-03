@@ -24,4 +24,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "nokogiri"
   gem.add_dependency "mechanize"
   gem.add_dependency "loofah"
+  gem.add_dependency 'rb-inotify', '~> 0.8.8'
 end
