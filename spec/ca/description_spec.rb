@@ -137,7 +137,6 @@ describe :Ca do
       end
 
       it "tags for sprzątaczka should be div, ol, li" do
-        p @object
         @object.hash[:sprzątaczka].weights.first.should eq [:text, :li, :ol, :div, :body, :html, :document]
       end
     end

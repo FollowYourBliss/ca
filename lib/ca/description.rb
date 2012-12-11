@@ -49,6 +49,7 @@ module Ca
       run_tag_analyse!
       run_position_analyse!(text_number_of_words)
       sort_by(:frequency)
+      clean!
       self
     end
 
@@ -110,6 +111,14 @@ module Ca
             node.add_class(error.klass)
           end
       end
+    end
+
+    # Clean Description hash from short phrases or phrases with warnings
+    def clean!
+      @hash.delete_if do |key, value|
+        key.to_s.size == 1
+      end
+
     end
 
     # Create if don't exist key in hash or update hash if not empty

@@ -31,8 +31,11 @@ include Singleton
     open(href, "User-Agent" => user_agent)
   end
 
+  def url(url)
+    open(url)
+  end
+
   def user_agent
-    "HTTP_USER_AGENT:Mozilla/5.0 (Windows; U; Windows NT 6.0;
-en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.47"
+    "HTTP_USER_AGENT:Mozilla/5.0"
   end
 end
