@@ -14,9 +14,13 @@ module Ca
                   :values,
                   :value,
                   :position_values,
-                  :occurrence
+                  :occurrence,
+                  :standard_deviation,
+                  :average
 
                   # occurrence - percentage use in text
+                  # standard_deviation - standard deviation of distance between positions
+                  # average - average distance between positions
   ##########################################
   # Object methods
   ##########################################
@@ -61,6 +65,7 @@ module Ca
     def initialize
       @frequency, @value, @position_values, @occurrence = 0, 0, 0, 0.00
       @positions, @weights, @warning, @node_id, @values = [], [], [], [], []
+      self
     end
 
     # Return true if words_count if greater than 1
@@ -78,10 +83,16 @@ module Ca
 
     # Analyse position of phrases in context of whole text
     def position_analyse(last_index)
-      result_table = Ca::Features.intend_distances(@positions.sort, last_index)
-      @value += (@position_values = result_table.standard_deviation)
+      distance_table = Ca::Features.intend_distances(@positions.sort, last_index)
+      @value += (@position_values = position_score(distance_table))
       @occurrence = count_occurrence(last_index)
       # p "Pozycje #{@positions} tabela wyników #{result_table} last index #{last_index} position values #{@position_values} occurrence: #{@occurrence}"
+    end
+
+    # Rerurn standard deviation of distance table and set it in Object
+    def position_score(distance_table)
+      @average = distance_table.mean
+      @standard_deviation = distance_table.standard_deviation
     end
 
 
@@ -148,6 +159,8 @@ module Ca
       array << last_index - positions.last
       array
     end
+
+
   end
 end
 

@@ -20,7 +20,9 @@ include Singleton
   def initialize
     @start = 1
   end
-  # Load HTML file and resturn string table
+
+
+  # Load HTML file and return string table from spec/fixtures/ with html extension
   def fixtures(url)
     open("spec/fixtures/#{url}.html", "User-Agent" => user_agent)
   end

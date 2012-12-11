@@ -46,6 +46,6 @@ class String
   end
 
   def remove_dots!
-    split(".").join.split(",").join.split("|").join
+    split(".").join.split(",").join.split(":").join
   end
 end

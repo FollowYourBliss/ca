@@ -7,6 +7,8 @@ module Nokogiri
       def remove_unnecessary
         xpath('//comment()').remove
         xpath("//script").remove
+        xpath("//noscript").remove
+        xpath("//style").remove
       end
     end
   end

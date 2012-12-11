@@ -25,12 +25,11 @@ describe :Ca do
       end
 
       it "is an Object of Ca::Analyse" do
-
         @analyse.should be_a Ca::Analyse
       end
 
       it "have Finxum 10 in frequency field of :and key" do
-        @analyse.description.hash[:and].frequency.should eql 9
+        @analyse.description.hash[:and].frequency.should eql 5
       end
 
       it "have Featrue for :'releases every' key" do
@@ -63,12 +62,47 @@ describe :Ca do
       end
 
       it "can interpret another encoding" do
-        @analyse.description.display_keys
         hash = @analyse.description.hash
         hash[:"wydział fizyki"].should_not be nil
         hash[:"zaprzestał prowadzenia własnej"].frequency.should be 1
       end
 
+    end
+
+
+    context "seo long text " do
+      before(:all) do
+        @analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("seo_text"))
+      end
+
+      it "can interpret long text correctly" do
+        hash = @analyse.description.hash
+        hash[:pozycjonowanie].frequency.should be 13
+      end
+
+    end
+
+    context "pajacyk.pl online analyse" do
+      before(:all) do
+        @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://www.pajacyk.pl"))
+      end
+
+      it "create object" do
+        @analyse.should_not be nil
+      end
+
+
+
+    end
+
+    context "di.com.pl article" do
+      before(:all) do
+        @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://di.com.pl/news/47068,0,Della_pokochaja_uzytkownicy_Linuksa_Nowy_ultrabook_z_Ubuntu_jest_genialny-Adrian_Nowak.html"))
+      end
+
+      it "create object" do
+        @analyse.should_not be nil
+      end
     end
 
   end

@@ -48,3 +48,14 @@ nefralgiczne:
 to nie działa
 pomysł - zmienić kropki na brak odstępu
 wniosek - jesteś geniuszem
+
+
+na podstawie fixtures seo_text przygotować testy i je spełnić
+zastanowić się jakie przedziały wartości ochylenia standardowego przyjąć dla tekstu - z uwzględnieniem wartości frequency
+
+
+pamiętać
+<p><b>Dziennik Ali</b>:</p>
+
+
+testowanie csv

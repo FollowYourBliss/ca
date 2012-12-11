@@ -116,5 +116,30 @@ describe :Ca do
         @img_description.should be_a Ca::Description
       end
     end
+
+
+    context "stange situations" do
+      before(:all) do
+        text = Nokogiri::HTML(hard_fixtures[:strange_situations])
+        @object = Ca::Description.new(text)
+      end
+      it "create object for strange situations HTML text" do
+        @object.should be_a Ca::Description
+      end
+
+      it "should set hash attribute in object" do
+        @object.hash.should be_a Hash
+      end
+
+      it "sprzątaczka position should be 4" do
+        @object.hash[:sprzątaczka].positions.count.should equal 1
+        @object.hash[:sprzątaczka].positions.first.should equal 4
+      end
+
+      it "tags for sprzątaczka should be div, ol, li" do
+        p @object
+        @object.hash[:sprzątaczka].weights.first.should eq [:text, :li, :ol, :div, :body, :html, :document]
+      end
+    end
   end
 end

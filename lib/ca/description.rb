@@ -48,7 +48,39 @@ module Ca
       Ca::NodeCounter.instance.reset
       run_tag_analyse!
       run_position_analyse!(text_number_of_words)
-      sort_by(:occurrence)
+      sort_by(:frequency)
+      self
+    end
+
+
+    # Create files in folder tmp first have positions table to draw chart
+    # second is every phrase standard deviation
+    def to_csv(filename)
+      CSV.open("tmp/#{filename}.csv", "wb") do |csv|
+        first_n.each do |hash|
+          csv << [hash.first.to_s] + hash.last.positions
+        end
+      end
+      CSV.open("tmp/#{filename}_standard_deviation.csv", "wb") do |csv|
+        @hash.each do |key, value|
+          csv << [key.to_s, value.standard_deviation]
+        end
+      end
+
+      File.open("tmp/#{filename}.yml", "w+") do |file|
+        file.write(@hash.to_yaml)
+      end
+
+      File.open("tmp/#{filename}.txt", "w+") do |file|
+        file.write(@hash)
+      end
+
+      CSV.open("tmp/#{filename}_tags_lookout.csv", "wb") do |csv|
+        @hash.each do |key, value|
+          csv << [key.to_s]
+          csv << [value.weights]
+        end
+      end
     end
 
   ##########################################
@@ -98,6 +130,11 @@ module Ca
       end
     end
 
+    # Fetch first n elements from @hash attribute
+    def first_n(number = Ca::Config.instance.phrase_to_csv)
+      @hash.first(number)
+    end
+
     # Add warning class to every phrase, fill it if we have got any warning
     # Check every position in position hash
     def long_phrase_warning(feature)
@@ -137,7 +174,7 @@ module Ca
       array
     end
 
-    # Sort hash by any number value from Feature Object
+    # Sort hash by any value (number value) from Feature Object
     def sort_by(field)
       @hash = Hash[
         @hash.sort_by { |key, value|

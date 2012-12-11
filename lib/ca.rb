@@ -6,6 +6,7 @@ require "html_reader"
 require "open-uri"
 require "mechanize"
 require "enumerable"
+require "csv"
 
 require "ca/analyse"
 require "ca/config"

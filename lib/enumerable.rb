@@ -1,10 +1,11 @@
 # encoding: utf-8
 module Enumerable
+
   # Sum of all elements in Array
   def sum
     self.reduce(:+)
   end
-  # Mead of elements in Array
+  # Mean of elements in Array
   def mean
     self.sum/self.length.to_f
   end

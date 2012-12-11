@@ -11,6 +11,8 @@
 julia_sample: "<b>Julia</b> kim jesteś"
 nokogiri: "<i><u><strong>Alicja to moja ukochana kobieta.</strong> <ul>Bardzo lubi<li>kawę nad ranem</li><li>jesc bezy</li><li>zapach lilii</li></ul>Andzia też jest <b>fajna</b></u></i>"
 
+:strange_situations: "<div>Ania<ol>funkcje numerowane<li>przewodnicząca</li><li>sprzątaczka<br/>obierki</li></ol></div><br/>"
+
 :matching:
   :text: "sample"
   :tags:

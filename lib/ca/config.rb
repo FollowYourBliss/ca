@@ -13,7 +13,8 @@ module Ca
   # Getters and setters
   ##########################################
     attr_reader :tags_strength,
-                :phrase_length
+                :phrase_length,
+                :phrase_to_csv
 
   ##########################################
   # Object Methods
@@ -21,6 +22,8 @@ module Ca
     def initialize()
       # Max length of phrase we choose to analyse text
       @phrase_length = 3
+      # Max number of phrases we pass to csv file
+      @phrase_to_csv = 10
       load_from_files()
     end
 
