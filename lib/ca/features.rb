@@ -35,6 +35,17 @@ module Ca
       }.any?
     end
 
+    def correct_tags?
+      @weights.each do |tags|
+        if tags.last != :title
+          if tags.last != :document
+            raise Ca::Exceptions::IncompleteTags
+          end
+        end
+      end
+    end
+
+
     # Create position and weigths Array in weights for +position+ that isn't in @positions, increment frequency
     def create(position)
       unless @positions.include? position

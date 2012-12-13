@@ -24,6 +24,7 @@ require "ca/exceptions/img_warnings"
 require "ca/exceptions/link_warnings"
 require "ca/exceptions/tag_warnings"
 require "ca/exceptions/title_warnings"
+require "ca/exceptions/incomplete_tags"
 
 require "nokogiri/HTML/node_specyfication"
 require "nokogiri/HTML/document"

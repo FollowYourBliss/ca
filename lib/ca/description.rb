@@ -50,6 +50,7 @@ module Ca
       run_position_analyse!(text_number_of_words)
       sort_by(:frequency)
       clean!
+      check_harmony
       self
     end
 
@@ -229,6 +230,13 @@ module Ca
           csv << [key.to_s]
           csv << [value.weights]
         end
+      end
+    end
+
+    # Check every hash value by run correct_tags? on it, throw exeption
+    def check_harmony
+      @hash.each_value do |value|
+          value.correct_tags?
       end
     end
 
