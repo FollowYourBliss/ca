@@ -57,32 +57,12 @@ module Ca
     # Create files in folder tmp first have positions table to draw chart
     # second is every phrase standard deviation
     def to_csv(filename)
-      CSV.open("tmp/#{filename}.csv", "wb") do |csv|
-        first_n.each do |hash|
-          csv << [hash.first.to_s] + hash.last.positions
-        end
-      end
-      CSV.open("tmp/#{filename}_standard_deviation.csv", "wb") do |csv|
-        @hash.each do |key, value|
-          csv << [key.to_s, value.standard_deviation]
-        end
-      end
-
-      File.open("tmp/#{filename}.yml", "w+") do |file|
-        file.write(@hash.to_yaml)
-      end
-
-      File.open("tmp/#{filename}.txt", "w+") do |file|
-        file.write(@hash)
-      end
-
-      CSV.open("tmp/#{filename}_tags_lookout.csv", "wb") do |csv|
-        @hash.each do |key, value|
-          csv << [key.to_s]
-          csv << [value.weights]
-        end
-      end
+      simple_position_csv(filename)
+      standard_deviation_csv(filename)
+      tags_lookout_csv(filename)
+      extra_debug_files(filename)
     end
+
 
   ##########################################
   # Private methods
@@ -130,6 +110,16 @@ module Ca
       @hash[key].update(tags, position, words_count)
     end
 
+    # Run methods to generate addiotion defbug files such as:
+       # yaml file of @hash,
+       # html file of @text,
+       # txt file of @hash
+    def extra_debug_files(filename)
+      yaml_file(filename)
+      html_file(filename)
+      txt_file(filename)
+    end
+
     # Method fetch all phrases at +number+ place
     #   for analyze_text "Koko Foo" with number 0 #=> {:"Koko Foo" => Features, :Koko => Features}
     #   for analyze_text "Koko Foo Mi" with number 1 #=> {:Foo => Feature, :"Foo Mi" => Features}
@@ -142,6 +132,13 @@ module Ca
     # Fetch first n elements from @hash attribute
     def first_n(number = Ca::Config.instance.phrase_to_csv)
       @hash.first(number)
+    end
+
+    # Parse @text to HTML and save it into the tml/filename.html
+    def html_file(filename)
+      File.open("tmp/#{filename}.html", "wb") do |file|
+        file.write(@text.to_html)
+      end
     end
 
     # Add warning class to every phrase, fill it if we have got any warning
@@ -183,6 +180,16 @@ module Ca
       array
     end
 
+    # For first_n methood save in csv file located at /tml/+filename+.csv all its positions
+    def simple_position_csv(filename)
+      CSV.open("tmp/#{filename}.csv", "wb") do |csv|
+        first_n.each do |hash|
+          csv << [hash.first.to_s] + hash.last.positions
+        end
+      end
+    end
+
+
     # Sort hash by any value (number value) from Feature Object
     def sort_by(field)
       @hash = Hash[
@@ -192,6 +199,14 @@ module Ca
       ]
     end
 
+    # Create CSV file with stadard deviation of position array for each key in @hash, save it in tmp/+filename+.csv
+    def standard_deviation_csv(filename)
+      CSV.open("tmp/#{filename}_standard_deviation.csv", "wb") do |csv|
+        @hash.each do |key, value|
+          csv << [key.to_s, value.standard_deviation]
+        end
+      end
+    end
 
     # Tag analyze for each feature in out @hash
     def run_tag_analyse!
@@ -207,11 +222,34 @@ module Ca
       end
     end
 
+    # For each key in @hash argument and it's name and weights save them to file tml/+filename+_tags_lookout.csv
+    def tags_lookout_csv(filename)
+      CSV.open("tmp/#{filename}_tags_lookout.csv", "wb") do |csv|
+        @hash.each do |key, value|
+          csv << [key.to_s]
+          csv << [value.weights]
+        end
+      end
+    end
 
     # Return number of words for text
     # (remember to run this after analyze)
     def text_number_of_words
       @text.text.nr_of_words
+    end
+
+    # Save @hash atribute in tmp/+filename+.txt
+    def txt_file(filename)
+      File.open("tmp/#{filename}.txt", "w+") do |file|
+        file.write(@hash)
+      end
+    end
+
+    # Parse @hash attribute and save it in tmp/+filename+.yml
+    def yaml_file(filename)
+      File.open("tmp/#{filename}.yml", "w+") do |file|
+        file.write(@hash.to_yaml)
+      end
     end
   end
 end

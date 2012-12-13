@@ -181,3 +181,6 @@ ubuntu_article: |
       </div>
     </div>
   </div>
+
+:strange_situations2: |
+  <ol>Ordered list<li></li><li>first</li></ol>

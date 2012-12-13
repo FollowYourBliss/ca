@@ -45,7 +45,26 @@ class String
     force_encoding(encoding).encode("utf-8", replace: nil)
   end
 
-  def remove_dots!
-    split(".").join.split(",").join.split(":").join
+
+
+
+
+  # Remove dots and other unnecessary chars, keep only necessary to analyze
+  def without_garbage
+    reg = Regexp.new /[#{String.characters.join}]+/
+    p self.scan(reg).join("").gsub("\n", " ").gsub("|", " ")
+    self.scan(reg).join("").gsub("\n", " ").gsub("|", " ").gsub("-", " ")
   end
+
+  ##########################################
+  # Class methods
+  ##########################################
+  # Return array of all latters from alphabets
+  def self.characters
+    alphabet = ('a'..'z').to_a + ('A'..'Z').to_a
+    digits = ('0'..'9').to_a
+    polish = %w(ą Ą ć Ć ż Ż ź Ź ń Ń ś Ś ł Ł ó Ó ę Ę)
+    alphabet + digits + polish + [" ", "\n"]
+  end
+
 end

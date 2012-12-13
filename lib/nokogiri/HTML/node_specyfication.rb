@@ -62,6 +62,7 @@ module Nokogiri
         childrens.each do |child|
           tag_analyzer(child, description, tag)
           text = child.text
+          text = text.without_garbage if text
           @@counter += text.nr_of_words unless (text.nil?) or (child.name == "text")
         end
       end
@@ -69,7 +70,7 @@ module Nokogiri
       # Analyse of single node without his children (in program flow children are analyzed before)
       def self.single_node(node, tag, description)
         text = node.text
-        text = text.remove_dots! if text
+        text = text.without_garbage if text
         has_children, words_count = node.children.empty?, (text ? text.nr_of_words : 0)
         @@counter -= words_count unless has_children
         match_tags_to_position(text, tag, description)

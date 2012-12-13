@@ -70,40 +70,59 @@ describe :Ca do
     end
 
 
-    context "seo long text " do
+    # context "seo long text " do
+    #   pending "temporarily disabled"
+    #   before(:all) do
+    #     @analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("seo_text"))
+    #   end
+
+    #   it "can interpret long text correctly" do
+    #     hash = @analyse.description.hash
+    #     hash[:pozycjonowanie].frequency.should be 13
+    #   end
+
+    # end
+
+    # context "pajacyk.pl online analyse" do
+    #   pending "temporarily disabled"
+    #   before(:all) do
+    #     @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://www.pajacyk.pl"))
+    #   end
+
+    #   it "create object" do
+    #     @analyse.should_not be nil
+    #   end
+    # end
+
+    # context "di.com.pl article" do
+    #   pending "temporarily disabled"
+    #   before(:all) do
+    #     @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://di.com.pl/news/47068,0,Della_pokochaja_uzytkownicy_Linuksa_Nowy_ultrabook_z_Ubuntu_jest_genialny-Adrian_Nowak.html"))
+    #   end
+
+    #   it "create object" do
+    #     @analyse.should_not be nil
+    #   end
+    # end
+
+    context "analyse strange situations" do
       before(:all) do
-        @analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("seo_text"))
+        @analyse = Ca::Analyse.new(hard_fixtures[:strange_situations2])
       end
 
-      it "can interpret long text correctly" do
+      it "correctly set frequency" do
         hash = @analyse.description.hash
-        hash[:pozycjonowanie].frequency.should be 13
-      end
-
-    end
-
-    context "pajacyk.pl online analyse" do
-      before(:all) do
-        @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://www.pajacyk.pl"))
-      end
-
-      it "create object" do
-        @analyse.should_not be nil
+        hash[:first].frequency.should eq 1
       end
 
 
-
-    end
-
-    context "di.com.pl article" do
-      before(:all) do
-        @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://di.com.pl/news/47068,0,Della_pokochaja_uzytkownicy_Linuksa_Nowy_ultrabook_z_Ubuntu_jest_genialny-Adrian_Nowak.html"))
-      end
-
-      it "create object" do
-        @analyse.should_not be nil
+      it "correctly set weights" do
+        hash = @analyse.description.hash
+        hash[:first].weights.should eq [[:text, :li, :ol, :body, :html, :document]]
       end
     end
+
+
 
   end
 end

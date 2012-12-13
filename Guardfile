@@ -7,11 +7,8 @@ guard 'bundler' do
   # watch(/^.+\.gemspec/)
 end
 
-guard 'rails_best_practices' do
-  watch(%r{^app/(.+)\.rb$})
-end
 
-guard 'rspec' do
+guard 'rspec', :version => 2, :bundler => false, :cli => "--color --format nested --drb" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

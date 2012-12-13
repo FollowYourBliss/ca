@@ -59,3 +59,8 @@ pamiętać
 
 
 testowanie csv
+
+pamietac jakim wielkim głupkiem jesteś bob
+nie inkrementowałeś licznika - źle go inkremenrtowałeś
+
+przykład: %q{<div class="post-menu"><a href="/q/5918606" title="short permalink to this question" class="short-link" id="link-post-5918606">share</a><span class="lsep">|</span><a href="/posts/5918606/edit" class="suggest-edit-post" title="">improve this question</a></div>}
