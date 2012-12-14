@@ -21,7 +21,5 @@ module Ca
       @description = Ca::Description.new(nokogiri_structure, phrase_length)
       self
     end
-
-
   end
 end

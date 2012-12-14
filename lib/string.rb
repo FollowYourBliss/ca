@@ -40,16 +40,11 @@ class String
     html_remove.split.size
   end
 
-  # Change encoding from any to utf-8, must be declarated in argument
-  def to_utf8(encoding = "utf-8")
-    force_encoding(encoding).encode("utf-8", replace: nil)
-  end
-
 
   # Remove dots and other unnecessary chars, keep only necessary to analyze
   def without_garbage
     reg = Regexp.new /[#{String.characters.join}]+/
-    puts self.scan(reg).join("").gsub("\n", " ").gsub("|", " ")
+    # puts self.scan(reg).join("").gsub("\n", " ").gsub("|", " ")
     self.scan(reg).join("").gsub("\n", " ").gsub("|", " ").gsub("-", " ")
   end
 
@@ -64,6 +59,11 @@ class String
   # Polish diacritical symbols as Array
   def self.polish_diacritical
     %w(ą Ą ć Ć ż Ż ź Ź ń Ń ś Ś ł Ł ó Ó ę Ę)
+  end
+
+  # Polish diacritical symbols as Array
+  def self.deutsch_diacritical
+    %w(Ä ä Ö ö Ü ü)
   end
 
   # Simple alphabet as Array

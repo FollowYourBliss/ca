@@ -64,3 +64,17 @@ pamietac jakim wielkim głupkiem jesteś bob
 nie inkrementowałeś licznika - źle go inkremenrtowałeś
 
 przykład: %q{<div class="post-menu"><a href="/q/5918606" title="short permalink to this question" class="short-link" id="link-post-5918606">share</a><span class="lsep">|</span><a href="/posts/5918606/edit" class="suggest-edit-post" title="">improve this question</a></div>}
+
+
+
+
+analiza pod względem słów kluczowych
+na hasło pancakes with jam
+wynik 1
+http://www.foodinjars.com/2011/11/preserves-in-action-jam-filled-pancakes/
+
+wynik 8
+http://www.epicurious.com/recipes/food/views/Jam-Pancakes-Flamed-with-Kirsch-107161
+
+wynik 45
+http://www.howsweeteats.com/2010/09/peanut-butter-and-jelly-pancakes/

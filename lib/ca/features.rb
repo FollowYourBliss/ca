@@ -38,8 +38,9 @@ module Ca
     # Method that raise exeption if any of @weigths is incorrect - doesn't end with :document tag
     def correct_tags?
       @weights.each do |tags|
-        if tags.last != :title
-          if tags.last != :document
+        last_tag = tags.last
+        if last_tag != :title
+          if last_tag != :document
             raise Ca::Exceptions::IncompleteTags.new("Problem with incomplete tags")
           end
         end
@@ -80,11 +81,24 @@ module Ca
       self
     end
 
+    # Loot at @warning[+index+] and return true if any warning set
+    def is_warnig_at?(index)
+      return false if @words_count < 2
+      @warning.at(index).any?
+    end
+
+
     # Return true if words_count if greater than 1
     # False if not
     def long?
       words_count > 1
     end
+
+    # Multiply score - if phrase is long than 1 we multiply score by it WORDS COUNT
+    def multiply_score!
+      @value *= @words_count
+    end
+
 
     # Return @weights for position in text specified by offset
     # return Array of symbols
@@ -98,15 +112,24 @@ module Ca
       distance_table = Ca::Features.intend_distances(@positions.sort, last_index)
       @value += (@position_values = position_score(distance_table))
       @occurrence = count_occurrence(last_index)
-      # p "Pozycje #{@positions} tabela wyników #{result_table} last index #{last_index} position values #{@position_values} occurrence: #{@occurrence}"
+      # REMEMBER ME
+      # last thing to do with value
+      multiply_score!
     end
 
     # Rerurn standard deviation of distance table and set it in Object
     def position_score(distance_table)
       @average = distance_table.mean
       @standard_deviation = distance_table.standard_deviation
+      position_score_intervals
     end
 
+    # Return numner of points from value of standard deviation
+    def position_score_intervals
+      return 4 if @standard_deviation < 110
+      return 2 if @standard_deviation < 250
+      @standard_deviation < 375 ? 1 : 0
+    end
 
     # Return self if @position include +position+
     def single_word_at(position)
@@ -128,8 +151,10 @@ module Ca
     def tag_value_analyser
       @positions.each_index do |index|
         points = Ca::Features.count_points(@weights[index])
-        @values[index] = points
-        @value += points
+        unless is_warnig_at? index
+          @values[index] = points
+          @value += points
+        end
       end
     end
 
@@ -162,14 +187,13 @@ module Ca
 
     # Intend distances by table elements
     def self.intend_distances(positions, last_index)
-      array = []
-      array << positions.first if positions.first
+      array, first_position = [], positions.first
+      array << first_position if first_position
       nr_of_elements = positions.length - 1
       nr_of_elements.times do |index|
         array << positions[index+1] - positions[index]
       end
       array << last_index - positions.last
-      array
     end
 
 

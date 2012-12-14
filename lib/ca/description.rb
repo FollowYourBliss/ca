@@ -10,7 +10,8 @@ module Ca
   # hash - hash where key is phrase and valude is his Feature Object
   # text - text we've analysed
     attr_reader :hash,
-                :text
+                :text,
+                :plagiarism
 
   ##########################################
   # Object methods
@@ -30,13 +31,6 @@ module Ca
       end
     end
 
-    # Debugging function to display all keys
-    def display_keys
-      @hash.each do |key, value|
-        p "Key ********]#{key}[********* positions #{value.positions} tags #{value.weights} occurrence #{value.occurrence}"
-      end
-    end
-
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
     def initialize(nokogiri_structure, phrase_lenght = Ca::Config.instance.phrase_length)
@@ -48,9 +42,10 @@ module Ca
       Ca::NodeCounter.instance.reset
       run_tag_analyse!
       run_position_analyse!(text_number_of_words)
-      sort_by(:frequency)
       clean!
       check_harmony
+      sort_by(:value)
+      plagiarism_test
       self
     end
 
@@ -187,8 +182,9 @@ module Ca
     def simple_position_csv(filename)
       filename = "tmp/#{filename}.csv"
       CSV.open(filename, "wb") do |csv|
+        csv << ["phrase", "positions"]
         first_n.each do |hash|
-          csv << [hash.first.to_s] + hash.last.positions
+          csv << [hash.first.to_s] +  hash.last.positions
         end
       end
       puts "  #{filename}  - created"
@@ -208,8 +204,9 @@ module Ca
     def standard_deviation_csv(filename)
       filename = "tmp/#{filename}_standard_deviation.csv"
       CSV.open(filename, "wb") do |csv|
+        csv << ["phrase", "standard_deviation", "score"]
         @hash.each do |key, value|
-          csv << [key.to_s, value.standard_deviation]
+          csv << [key.to_s, value.standard_deviation, value.value]
         end
       end
       puts "  #{filename}  - created"
@@ -246,6 +243,14 @@ module Ca
       @hash.each_value do |value|
           value.correct_tags?
       end
+    end
+
+
+    # Check exitising of simmillar text in internet
+    def plagiarism_test
+      test = Ca::SimilarTest.new(@text.text)
+      test.run
+      @plagiarism = test.result
     end
 
     # Return number of words for text

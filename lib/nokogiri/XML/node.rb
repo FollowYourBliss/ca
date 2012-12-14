@@ -21,12 +21,6 @@ module Nokogiri
         self.after(Nokogiri::XML::Text.new(" ", self))
       end
 
-      # Replace <br/> tags with " "
-      # self.replace don't work - segmentation fault, so I change it to self.after
-      # it work same good
-      def eliminate_br
-        self.after(Nokogiri::XML::Text.new(" ", self))
-      end
     end
   end
 end

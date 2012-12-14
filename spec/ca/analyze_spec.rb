@@ -70,21 +70,19 @@ describe :Ca do
     end
 
 
-    # context "seo long text " do
-    #   pending "temporarily disabled"
-    #   before(:all) do
-    #     @analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("seo_text"))
-    #   end
+    context "seo long text " do
+      before(:all) do
+        @analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("seo_text"))
+      end
 
-    #   it "can interpret long text correctly" do
-    #     hash = @analyse.description.hash
-    #     hash[:pozycjonowanie].frequency.should be 13
-    #   end
+      it "can interpret long text correctly" do
+        hash = @analyse.description.hash
+        hash[:pozycjonowanie].frequency.should be 13
+      end
 
-    # end
+    end
 
     # context "pajacyk.pl online analyse" do
-    #   pending "temporarily disabled"
     #   before(:all) do
     #     @analyse = Ca::Analyse.new(HTMLReader.instance.page("http://www.pajacyk.pl"))
     #   end

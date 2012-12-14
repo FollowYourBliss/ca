@@ -52,7 +52,7 @@ describe :Ca do
         @feature.position_values.should be_true
       end
       it "should return float" do
-        @feature.position_values.should be_a Float
+        @feature.position_values.should be_a Fixnum
       end
       it "return percentage value of occurrence in text" do
         @feature.occurrence.should be_a Float

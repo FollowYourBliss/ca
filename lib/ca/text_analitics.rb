@@ -1,7 +1,6 @@
 # encoding: utf-8
 module Ca
   # Class Ca::TextAnalitics
-
   class TextAnalitics
   ##########################################
   # Class methods

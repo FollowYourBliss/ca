@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "rubygems"
 require "nokogiri"
 require "singleton"
 require "string"
@@ -9,14 +10,16 @@ require "open-uri"
 require "mechanize"
 require "enumerable"
 require "csv"
+require 'RMagick'
+require "gruff"
 
 require "ca/analyse"
 require "ca/config"
 require "ca/description"
 require "ca/features"
 require "ca/node_counter"
+require "ca/similar_test"
 require "ca/text_analitics"
-require "ca/tmp_refactoring"
 require "ca/version"
 require "ca/warning"
 

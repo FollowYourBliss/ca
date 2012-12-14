@@ -25,4 +25,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "mechanize"
   gem.add_dependency "loofah"
   gem.add_dependency 'rb-inotify', '~> 0.8.8'
+  gem.add_dependency "gruff"
+  gem.add_dependency "rmagick"
 end

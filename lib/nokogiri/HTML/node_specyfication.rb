@@ -44,12 +44,11 @@ module Nokogiri
       #   It isn't very important to get return value of this function
       def self.tag_analyzer(node, description, tags = [])
         @@counter = 0 if tags.empty?
-
         tag = node.name.to_sym
         along_childrens(node.children, description, tag)
         single_node(node, tag, description)
-        node.surround if forbidden_tags.include?(tag) or tag == "text"
-        node.eliminate_br if node.name=="br"
+        node.surround if forbidden_tags.include?(tag) or (tag == :text)
+
       end
   ##########################################
   # Private methods
