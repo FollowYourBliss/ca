@@ -46,13 +46,10 @@ class String
   end
 
 
-
-
-
   # Remove dots and other unnecessary chars, keep only necessary to analyze
   def without_garbage
     reg = Regexp.new /[#{String.characters.join}]+/
-    p self.scan(reg).join("").gsub("\n", " ").gsub("|", " ")
+    puts self.scan(reg).join("").gsub("\n", " ").gsub("|", " ")
     self.scan(reg).join("").gsub("\n", " ").gsub("|", " ").gsub("-", " ")
   end
 
@@ -61,10 +58,22 @@ class String
   ##########################################
   # Return array of all latters from alphabets
   def self.characters
-    alphabet = ('a'..'z').to_a + ('A'..'Z').to_a
-    digits = ('0'..'9').to_a
-    polish = %w(ą Ą ć Ć ż Ż ź Ź ń Ń ś Ś ł Ł ó Ó ę Ę)
-    alphabet + digits + polish + [" ", "\n"]
+    alphabet + digits + polish_diacritical + [" ", "\n"]
+  end
+
+  # Polish diacritical symbols as Array
+  def self.polish_diacritical
+    %w(ą Ą ć Ć ż Ż ź Ź ń Ń ś Ś ł Ł ó Ó ę Ę)
+  end
+
+  # Simple alphabet as Array
+  def self.alphabet
+    ('a'..'z').to_a + ('A'..'Z').to_a
+  end
+
+  # Digits as Array
+  def self.digits
+    ('0'..'9').to_a
   end
 
 end

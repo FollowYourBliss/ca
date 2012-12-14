@@ -24,7 +24,7 @@ task :csv_default do
   puts "Wait..."
   analyse = Ca::Analyse.new(HTMLReader.instance.fixtures("seo_text"));
   analyse.description.to_csv("default")
-  puts "Succesfully create tmp/default.csv and tmp/default_standard_deviation.csv"
+  puts "Bye bye.."
 end
 
 desc "Create csv file from external server URL"
@@ -34,7 +34,7 @@ task :csv_external do
   puts "Wait..."
   analyse = Ca::Analyse.new(HTMLReader.instance.page(url));
   analyse.description.to_csv("external")
-  puts "Succesfully create tmp/external.csv and tmp/external_standard_deviation.csv"
+  puts "Bye bye.."
 end
 
 desc "Create csv file from internal file"
@@ -44,5 +44,5 @@ task :csv_file do
   puts "Wait..."
   analyse = Ca::Analyse.new(HTMLReader.instance.page(path));
   analyse.description.to_csv("internal")
-  puts "Succesfully create tmp/internal.csv and tmp/internal_standard_deviation.csv"
+  puts "Bye bye.."
 end

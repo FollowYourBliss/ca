@@ -137,9 +137,11 @@ module Ca
 
     # Parse @text to HTML and save it into the tml/filename.html
     def html_file(filename)
-      File.open("tmp/#{filename}.html", "wb") do |file|
+      filename = "tmp/#{filename}.html"
+      File.open(filename, "wb") do |file|
         file.write(@text.to_html)
       end
+      puts "  #{filename}  - created"
     end
 
     # Add warning class to every phrase, fill it if we have got any warning
@@ -183,11 +185,13 @@ module Ca
 
     # For first_n methood save in csv file located at /tml/+filename+.csv all its positions
     def simple_position_csv(filename)
-      CSV.open("tmp/#{filename}.csv", "wb") do |csv|
+      filename = "tmp/#{filename}.csv"
+      CSV.open(filename, "wb") do |csv|
         first_n.each do |hash|
           csv << [hash.first.to_s] + hash.last.positions
         end
       end
+      puts "  #{filename}  - created"
     end
 
 
@@ -202,11 +206,13 @@ module Ca
 
     # Create CSV file with stadard deviation of position array for each key in @hash, save it in tmp/+filename+.csv
     def standard_deviation_csv(filename)
-      CSV.open("tmp/#{filename}_standard_deviation.csv", "wb") do |csv|
+      filename = "tmp/#{filename}_standard_deviation.csv"
+      CSV.open(filename, "wb") do |csv|
         @hash.each do |key, value|
           csv << [key.to_s, value.standard_deviation]
         end
       end
+      puts "  #{filename}  - created"
     end
 
     # Tag analyze for each feature in out @hash
@@ -225,12 +231,14 @@ module Ca
 
     # For each key in @hash argument and it's name and weights save them to file tml/+filename+_tags_lookout.csv
     def tags_lookout_csv(filename)
-      CSV.open("tmp/#{filename}_tags_lookout.csv", "wb") do |csv|
+      filename = "tmp/#{filename}_tags_lookout.csv"
+      CSV.open(filename, "wb") do |csv|
         @hash.each do |key, value|
           csv << [key.to_s]
           csv << [value.weights]
         end
       end
+      puts "  #{filename}  - created"
     end
 
     # Check every hash value by run correct_tags? on it, throw exeption
@@ -248,16 +256,20 @@ module Ca
 
     # Save @hash atribute in tmp/+filename+.txt
     def txt_file(filename)
-      File.open("tmp/#{filename}.txt", "w+") do |file|
+      filename = "tmp/#{filename}.txt"
+      File.open(filename, "w+") do |file|
         file.write(@hash)
       end
+      puts "  #{filename}  - created"
     end
 
     # Parse @hash attribute and save it in tmp/+filename+.yml
     def yaml_file(filename)
-      File.open("tmp/#{filename}.yml", "w+") do |file|
+      filename = "tmp/#{filename}.yml"
+      File.open(filename, "w+") do |file|
         file.write(@hash.to_yaml)
       end
+      puts "  #{filename}  - created"
     end
   end
 end

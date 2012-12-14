@@ -48,7 +48,7 @@ module Nokogiri
         tag = node.name.to_sym
         along_childrens(node.children, description, tag)
         single_node(node, tag, description)
-        node.surround if forbidden_tags.include? tag
+        node.surround if forbidden_tags.include?(tag) or tag == "text"
         node.eliminate_br if node.name=="br"
       end
   ##########################################
