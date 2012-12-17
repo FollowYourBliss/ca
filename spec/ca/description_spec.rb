@@ -89,8 +89,8 @@ describe :Ca do
         @description.hash[:"językowej każdy"].warning.first.forbidden.should be_true
       end
 
-      it "should return correct frequency" do
-        @description.hash[:każdy].frequency.should be 4
+      it "should return nil for każdy couse its on excluded" do
+        @description.hash[:każdy].should be nil
       end
 
     end

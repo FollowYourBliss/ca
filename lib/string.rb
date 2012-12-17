@@ -12,6 +12,12 @@ class String
     return self
   end
 
+  # Like downcase but supports encoding
+  def down_case
+    mb_chars.downcase.to_s
+  end
+
+
   # Return String without HTML tags
   #   "<b>sample</b>".html_remove #=> "sample"
   #   "<a href='www.google.com'>Link</a>" #=> "Link"
@@ -44,7 +50,6 @@ class String
   # Remove dots and other unnecessary chars, keep only necessary to analyze
   def without_garbage
     reg = Regexp.new /[#{String.characters.join}]+/
-    # puts self.scan(reg).join("").gsub("\n", " ").gsub("|", " ")
     self.scan(reg).join("").gsub("\n", " ").gsub("|", " ").gsub("-", " ")
   end
 
@@ -63,7 +68,7 @@ class String
 
   # Polish diacritical symbols as Array
   def self.deutsch_diacritical
-    %w(Ä ä Ö ö Ü ü)
+    %w(ä Ä ö Ö ü Ü)
   end
 
   # Simple alphabet as Array

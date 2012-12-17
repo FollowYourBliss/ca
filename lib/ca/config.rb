@@ -5,6 +5,7 @@ module Ca
 ############################### SINGLETON   CLASS
 #################################################
   class Config
+  PATH = "config/"
   ##########################################
   # Includes modules
   ##########################################
@@ -32,7 +33,11 @@ module Ca
       @excluded = []
 
       load_powers()
-      load_excluded()
+      load_all_excluded()
+    end
+
+    def get_excluded(locale)
+      File.read(PATH + "excluded.#{locale}.txt").split.map(&:to_sym)
     end
 
   ##########################################
@@ -42,17 +47,16 @@ module Ca
     # Load data in YAML file to Object fields
     def load_powers
       # Stength of each valuable tag specified by number example: h1: 50, b: 5
-      @tags_strength = YAML.load_file("config/tags_strength.yaml")
+      @tags_strength = YAML.load_file(PATH + "tags_strength.yaml")
     end
 
     # Load excluded characters from yaml file in /config
-    def load_excluded
-      path = "config/"
-      files = Dir.entries(path).keep_if do |file|
-        file.match /excluded.[a-z]{2}.yaml/
+    def load_all_excluded
+      files = Dir.entries(PATH).keep_if do |file|
+        file.match /excluded.[a-z]{2}.txt/
       end
       files.each do |file|
-        @excluded += YAML.load_file(path + file)
+        @excluded += File.read(PATH + file).split.map(&:to_sym)
       end
     end
   end

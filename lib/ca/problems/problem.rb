@@ -7,6 +7,7 @@ module Ca
   ##########################################
     include AbstractInterface
     # Interface methods
-    needs_implementation :msg
+    needs_implementation  :to_s,
+                          :to_sym
   end
 end

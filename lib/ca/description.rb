@@ -21,7 +21,7 @@ module Ca
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
     #   fill @hash
     def add(text, tags, counter)
-      phrases = TextAnalitics.phrases(text.downcase, @phrase_lenght)
+      phrases = TextAnalitics.phrases(text.down_case, @phrase_lenght)
       phrases.each do |phrase, index|
         position = counter+index
         unless phrase.empty?
@@ -31,11 +31,24 @@ module Ca
       end
     end
 
+    # Return all problems
+    def display_problems
+      @problems.map do |problem|
+        problem.to_s
+      end
+    end
+
+    # Return all problems as symbols
+    def problems_as_sym
+      @problems.map do |problem|
+        problem.to_sym
+      end
+    end
+
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
     def initialize(nokogiri_structure, phrase_lenght = Ca::Config.instance.phrase_length)
-      @hash, @text = {}, nokogiri_structure
-      @phrase_lenght, @problems = phrase_lenght, []
+      variables_set(nokogiri_structure, phrase_lenght)
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
       attributes_analyzer
@@ -59,6 +72,7 @@ module Ca
       tags_lookout_csv(filename)
       extra_debug_files(filename)
     end
+
 
 
   ##########################################
@@ -129,7 +143,7 @@ module Ca
 
     # Fill table of problems that should be fix by user
     def fetch_problems
-      @problems << Ca::HProblem.new unless @text.one_h1?
+      @problems << Ca::H1Problem.new unless @text.one_h1?
       @problems << Ca::MetaDescriptionProblem.new if @text.empty_meta_description?
       @problems << Ca::MetaKeywordsProblem.new if @text.empty_meta_keywords?
     end
@@ -276,6 +290,13 @@ module Ca
       end
       puts "  #{filename}  - created"
     end
+
+    # Initialize Object attributes
+    def variables_set(nokogiri_document, phrase_lenght)
+      @hash, @text = {}, nokogiri_document
+      @phrase_lenght, @problems = phrase_lenght, []
+    end
+
 
     # Parse @hash attribute and save it in tmp/+filename+.yml
     def yaml_file(filename)

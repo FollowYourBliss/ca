@@ -13,6 +13,7 @@ require "csv"
 require 'RMagick'
 require "gruff"
 require "abstract_interface"
+require "active_support/core_ext"
 
 require "ca/analyse"
 require "ca/config"
@@ -32,7 +33,7 @@ require "ca/exceptions/title_warnings"
 require "ca/exceptions/incomplete_tags"
 
 require "ca/problems/problem"
-require "ca/problems/h_problem"
+require "ca/problems/h1_problem"
 require "ca/problems/meta_description_problem"
 require "ca/problems/meta_keywords_problem"
 

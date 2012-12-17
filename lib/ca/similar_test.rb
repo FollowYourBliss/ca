@@ -11,7 +11,7 @@ module Ca
   ##########################################
    # Analyse +search_results+ from Mechanize, parse to Nokogiri, fetch only description and tokenize. Then compare with pattern +phraze+
     def analyse_result(search_result, phrase)
-        search_table = search_result.parser.xpath("//span[@class='st']").text.without_garbage.downcase.split
+        search_table = search_result.parser.xpath("//span[@class='st']").text.without_garbage.down_case.split
         phrase_table = phrase.split
         @result = (search_table & phrase_table).count > (Ca::Config.instance.google_phrase_lenght - 2)
     end

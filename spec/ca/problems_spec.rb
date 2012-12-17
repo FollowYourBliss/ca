@@ -23,7 +23,7 @@ describe :Ca do
           end
 
           it "create problem" do
-            @object.problems.first.should be_a Ca::HProblem
+            @object.problems.first.should be_a Ca::H1Problem
           end
 
         end

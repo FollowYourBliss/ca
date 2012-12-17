@@ -28,8 +28,8 @@ describe :Ca do
         @analyse.should be_a Ca::Analyse
       end
 
-      it "have Finxum 10 in frequency field of :and key" do
-        @analyse.description.hash[:can].frequency.should eql 3
+      it "have Finxum 1 in frequency field of :perfect key" do
+        @analyse.description.hash[:perfect].frequency.should eql 1
       end
 
       it "have Featrue for :'releases every' key" do
@@ -51,7 +51,6 @@ describe :Ca do
         hash = @analyse.description.hash
         hash[:"of best"].frequency.should be 1
         hash[:"applications rails"].weights.first.should eq [:p, :div, :body, :html, :document]
-        hash[:see].frequency.should be 1
       end
 
     end
