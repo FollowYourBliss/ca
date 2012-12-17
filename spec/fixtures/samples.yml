@@ -1,3 +1,7 @@
+:empty_description: "<meta name='Description'>"
+:fill_description: "<meta name='Description' content='Aleks'>"
+:empty_keywords: "<meta name='Keywords'>"
+:fill_description: "<meta name='Keywords' content='Aleks'>"
 :features:
   :weight:
     - :li
@@ -18,6 +22,12 @@ nokogiri: "<i><u><strong>Alicja to moja ukochana kobieta.</strong> <ul>Bardzo lu
   :tags:
     - "li"
     - "strong"
+
+:h1_problem_ok: |
+  <h1>Problem ok</h1>
+
+:h1_problem_not_ok: |
+  <h1>Problem</h1> not <h1>ok</h1>
 
 multiple_words: |
   Ania miala Ania Ania Ania Ania Ania <b>Jazda</b> Ania Ania Ania Ania Ania Ania Ania Ania Ania Ania

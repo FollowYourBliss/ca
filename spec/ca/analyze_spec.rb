@@ -29,7 +29,7 @@ describe :Ca do
       end
 
       it "have Finxum 10 in frequency field of :and key" do
-        @analyse.description.hash[:and].frequency.should eql 5
+        @analyse.description.hash[:can].frequency.should eql 3
       end
 
       it "have Featrue for :'releases every' key" do

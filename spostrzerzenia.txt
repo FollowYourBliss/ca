@@ -3,14 +3,8 @@ Nokogiri, oferuje bardzo dobre funckje, ale nie są niestety dla mnie wystarczaj
 Rozdzielanie w przypadku użycie forbidden_words, co mną kierowało, zasady, wytłumaczenie, model klas i obiektów.
 
 
-Todo:
-zastanowić się nad singletonem od nokogiri
-rozszczelnić ścisłe połączenie miedzy metodami statycznymi nokogiri a description
-załączyć mechanize
-spełnic testy
-sample sample sample
 
- git clone git@git.fractalsoft.org:ca -b develop
+git clone git@git.fractalsoft.org:ca -b develop
 
 
 
@@ -19,7 +13,6 @@ usuniecie komentarzy htmlowskich przed faza analizy
 useragent w open pomogl rozwiazac problemy z kodowaniem? wtf w ogole - do zbadadania, ale działą
 
 nefralgiczne:
-
 
 <tr>
   <td>
@@ -57,11 +50,11 @@ zastanowić się jakie przedziały wartości ochylenia standardowego przyjąć d
 pamiętać
 <p><b>Dziennik Ali</b>:</p>
 
-
+pliki wykresy, kilka
 testowanie csv
 
 pamietac jakim wielkim głupkiem jesteś bob
-nie inkrementowałeś licznika - źle go inkremenrtowałeś
+nie inkrementowałeś licznika - źle go inkrementowałeś
 
 przykład: %q{<div class="post-menu"><a href="/q/5918606" title="short permalink to this question" class="short-link" id="link-post-5918606">share</a><span class="lsep">|</span><a href="/posts/5918606/edit" class="suggest-edit-post" title="">improve this question</a></div>}
 
@@ -78,3 +71,13 @@ http://www.epicurious.com/recipes/food/views/Jam-Pancakes-Flamed-with-Kirsch-107
 
 wynik 45
 http://www.howsweeteats.com/2010/09/peanut-butter-and-jelly-pancakes/
+
+
+
+
+tagi keywords i descrription w obecnych czasach nie maja juz kompletnie znaczenia,
+
+
+trzeba wyeliminować kilka słów, które są z perspektywy analizy niepotrzebne
+
+

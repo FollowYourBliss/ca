@@ -15,7 +15,8 @@ module Ca
     attr_reader :tags_strength,
                 :phrase_length,
                 :phrase_to_csv,
-                :google_phrase_lenght
+                :google_phrase_lenght,
+                :excluded
 
   ##########################################
   # Object Methods
@@ -27,14 +28,32 @@ module Ca
       @phrase_to_csv = 100
       # length in words of phrase we parse to google using mechanize in similar_test.rb
       @google_phrase_lenght = 5
+      # table od excluded symbols
+      @excluded = []
 
-      load_from_files()
+      load_powers()
+      load_excluded()
     end
 
+  ##########################################
+  # Private Methods
+  ##########################################
+  private
     # Load data in YAML file to Object fields
-    def load_from_files()
+    def load_powers
       # Stength of each valuable tag specified by number example: h1: 50, b: 5
       @tags_strength = YAML.load_file("config/tags_strength.yaml")
+    end
+
+    # Load excluded characters from yaml file in /config
+    def load_excluded
+      path = "config/"
+      files = Dir.entries(path).keep_if do |file|
+        file.match /excluded.[a-z]{2}.yaml/
+      end
+      files.each do |file|
+        @excluded += YAML.load_file(path + file)
+      end
     end
   end
 end

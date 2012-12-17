@@ -18,5 +18,16 @@ describe :Ca do
       end
     end
 
+    context "create excluded table" do
+      it "create table of symbols" do
+        Ca::Config.instance.excluded.should be_an Array
+      end
+
+      it "elements are Symbols" do
+        Ca::Config.instance.excluded.all? {|elem| elem.class == Symbol}.should be_true
+      end
+
+    end
+
   end
 end

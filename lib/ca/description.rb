@@ -11,12 +11,12 @@ module Ca
   # text - text we've analysed
     attr_reader :hash,
                 :text,
-                :plagiarism
+                :plagiarism,
+                :problems
 
   ##########################################
   # Object methods
   ##########################################
-
 
     # Method that add +position+ and +tags+ to Features of phrazes from +text+
     #   fill @hash
@@ -35,7 +35,7 @@ module Ca
     # Additionaly save +nokogiri_structure+ to Object variable @text
     def initialize(nokogiri_structure, phrase_lenght = Ca::Config.instance.phrase_length)
       @hash, @text = {}, nokogiri_structure
-      @phrase_lenght = phrase_lenght
+      @phrase_lenght, @problems = phrase_lenght, []
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
       attributes_analyzer
@@ -46,6 +46,7 @@ module Ca
       check_harmony
       sort_by(:value)
       plagiarism_test
+      fetch_problems
       self
     end
 
@@ -90,11 +91,12 @@ module Ca
     end
 
     # Clean Description hash from short phrases or phrases with warnings
+    # and excluded words
     def clean!
       @hash.delete_if do |key, value|
-        key.to_s.size == 1
+        key.to_s.size == 1 or
+        Ca::Config.instance.excluded.include? key
       end
-
     end
 
     # Create if don't exist key in hash or update hash if not empty
@@ -123,6 +125,13 @@ module Ca
       @hash.select do |key, value|
         value.single_word_at(position)
       end
+    end
+
+    # Fill table of problems that should be fix by user
+    def fetch_problems
+      @problems << Ca::HProblem.new unless @text.one_h1?
+      @problems << Ca::MetaDescriptionProblem.new if @text.empty_meta_description?
+      @problems << Ca::MetaKeywordsProblem.new if @text.empty_meta_keywords?
     end
 
     # Fetch first n elements from @hash attribute
