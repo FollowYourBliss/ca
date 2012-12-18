@@ -24,6 +24,7 @@ module Ca
 
     # Increments counter
     def increment
+      raise Ca::TooLongText if @value > Ca::Config.instance.max_nr_of_nodes
       @value += 1
     end
 

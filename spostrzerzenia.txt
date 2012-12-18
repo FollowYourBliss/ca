@@ -77,3 +77,7 @@ tagi keywords i descrription w obecnych czasach nie maja juz kompletnie znaczeni
 trzeba wyeliminować kilka słów, które są z perspektywy analizy niepotrzebne
 
 
+git co -b develop
+git clone git@git.fractalsoft.org:ca-app -b develop
+
+

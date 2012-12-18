@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec_helper"
-describe :Ca do
-  describe :Description do
+describe :Problems do
+  describe :another_spec do
     context "reconize problems" do
       context "with h1" do
         context "if correct" do
@@ -11,7 +11,7 @@ describe :Ca do
           end
 
           it "don't create any h1 problem" do
-            @object.problems.count.should equal 2
+            @object.problems.count.should equal 3
           end
 
         end
@@ -48,7 +48,7 @@ describe :Ca do
           end
 
           it "don't create problem" do
-            @object.problems.count.should equal 2
+            @object.problems.count.should equal 3
           end
         end
 
@@ -72,7 +72,7 @@ describe :Ca do
           end
 
           it "create problem" do
-            @object.problems.last.should be_a Ca::MetaKeywordsProblem
+            @object.problems.at(1).should be_a Ca::MetaKeywordsProblem
           end
         end
 
@@ -83,7 +83,7 @@ describe :Ca do
           end
 
           it "don't create problem" do
-            @object.problems.count.should equal 2
+            @object.problems.count.should equal 3
           end
         end
 
@@ -94,7 +94,7 @@ describe :Ca do
           end
 
           it "create problem" do
-            @object.problems.last.should be_a Ca::MetaKeywordsProblem
+            @object.problems.at(1).should be_a Ca::MetaKeywordsProblem
           end
         end
       end

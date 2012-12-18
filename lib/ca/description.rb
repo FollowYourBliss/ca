@@ -12,7 +12,8 @@ module Ca
     attr_reader :hash,
                 :text,
                 :plagiarism,
-                :problems
+                :problems,
+                :tag_problem_flag
 
   ##########################################
   # Object methods
@@ -60,10 +61,19 @@ module Ca
       sort_by(:value)
       plagiarism_test
       fetch_problems
-      p "Horey!"
       self
     end
 
+    # Return number of chars for text in object without " " and "\n"
+    def text_number_of_chars
+      @test.number_of_chars
+    end
+
+    # Return number of words for text
+    # (remember to run this after analyze)
+    def text_number_of_words
+      @text.text.nr_of_words
+    end
 
     # Create files in folder tmp first have positions table to draw chart
     # second is every phrase standard deviation
@@ -101,6 +111,7 @@ module Ca
             Ca::TextAnalitics.node_attributes_analyze(node)
           rescue Ca::Exceptions::TagWarnings => error
             node.add_class(error.klass)
+            @tag_problem_flag = true
           end
       end
     end
@@ -147,6 +158,7 @@ module Ca
       @problems << Ca::H1Problem.new unless @text.one_h1?
       @problems << Ca::MetaDescriptionProblem.new if @text.empty_meta_description?
       @problems << Ca::MetaKeywordsProblem.new if @text.empty_meta_keywords?
+      @problems << Ca::TitleProblem.new if @text.empty_title?
     end
 
     # Fetch first n elements from @hash attribute
@@ -277,12 +289,6 @@ module Ca
       @plagiarism = test.result
     end
 
-    # Return number of words for text
-    # (remember to run this after analyze)
-    def text_number_of_words
-      @text.text.nr_of_words
-    end
-
     # Save @hash atribute in tmp/+filename+.txt
     def txt_file(filename)
       filename = "tmp/#{filename}.txt"
@@ -296,6 +302,7 @@ module Ca
     def variables_set(nokogiri_document, phrase_lenght)
       @hash, @text = {}, nokogiri_document
       @phrase_lenght, @problems = phrase_lenght, []
+      @tag_problem_flag = false
     end
 
 

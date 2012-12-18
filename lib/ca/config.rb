@@ -17,7 +17,8 @@ module Ca
                 :phrase_length,
                 :phrase_to_csv,
                 :google_phrase_lenght,
-                :excluded
+                :excluded,
+                :max_nr_of_nodes
 
   ##########################################
   # Object Methods
@@ -31,6 +32,8 @@ module Ca
       @google_phrase_lenght = 5
       # table od excluded symbols
       @excluded = []
+      # specyfy max number of nodes , if NodeCounter pass them than raise exeption
+      @max_nr_of_nodes = 5000
 
       load_powers()
       load_all_excluded()

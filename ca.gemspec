@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.name          = "ca"
   gem.require_paths = ["lib"]
   gem.version       = Ca::VERSION
+  gem.summary = 'Text analyse for SEO copywriters'
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rspec"

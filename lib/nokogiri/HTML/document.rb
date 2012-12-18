@@ -27,11 +27,25 @@ module Nokogiri
         return meta_empty?("keywords")
       end
 
+      # Return number of chars in HTML text
+      def number_of_chars
+        text.to_s.number_of_chars
+      end
+
       # Function that check meta tags by name of them
       def meta_empty?(name)
         tag = css("meta[name='#{name}']")
         return true if tag.nil? or tag.empty?
         return true if tag.first['content'].empty?
+        false
+      end
+
+      # Function that check title
+      # return false if everyfing is ok
+      def empty_title?
+        tag = xpath("//title")
+        return true if tag.nil? or tag.empty?
+        return true if tag.children.empty?
         false
       end
     end

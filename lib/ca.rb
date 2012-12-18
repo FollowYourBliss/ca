@@ -29,13 +29,13 @@ require "ca/warning"
 require "ca/exceptions/img_warnings"
 require "ca/exceptions/link_warnings"
 require "ca/exceptions/tag_warnings"
-require "ca/exceptions/title_warnings"
 require "ca/exceptions/incomplete_tags"
 
 require "ca/problems/problem"
 require "ca/problems/h1_problem"
 require "ca/problems/meta_description_problem"
 require "ca/problems/meta_keywords_problem"
+require "ca/problems/title_problem"
 
 
 require "nokogiri/HTML/node_specyfication"

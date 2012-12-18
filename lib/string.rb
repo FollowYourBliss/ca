@@ -46,6 +46,11 @@ class String
     html_remove.split.size
   end
 
+  # Return number of chars in String
+  def number_of_chars
+    html_remove.without_garbage.split("\n").join.split.join.length
+  end
+
 
   # Remove dots and other unnecessary chars, keep only necessary to analyze
   def without_garbage

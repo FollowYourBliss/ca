@@ -48,5 +48,13 @@ module Ca
       end
     end
 
+    # Return table of problematic classes during node analyse
+    def self.problematic_classes
+      classes = []
+      ["title", "alt", "href", "src"].each do |attribute|
+        classes << "#{attribute}_undeclared".to_sym
+        classes << "#{attribute}_empty".to_sym
+    end
+
   end
 end
