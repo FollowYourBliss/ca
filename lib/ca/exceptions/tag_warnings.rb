@@ -54,6 +54,7 @@ module Ca
       ["title", "alt", "href", "src"].each do |attribute|
         classes << "#{attribute}_undeclared".to_sym
         classes << "#{attribute}_empty".to_sym
+      end
     end
 
   end
