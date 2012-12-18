@@ -3,7 +3,6 @@ module Ca
   module Exceptions
     # Class Ca::Exceptions::IncompleteTags
     class IncompleteTags < Exception
-
     end
   end
 end

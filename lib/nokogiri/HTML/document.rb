@@ -27,6 +27,7 @@ module Nokogiri
         return meta_empty?("keywords")
       end
 
+      # Function that check meta tags by name of them
       def meta_empty?(name)
         tag = css("meta[name='#{name}']")
         return true if tag.nil? or tag.empty?

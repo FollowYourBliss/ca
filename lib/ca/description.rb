@@ -60,6 +60,7 @@ module Ca
       sort_by(:value)
       plagiarism_test
       fetch_problems
+      p "Horey!"
       self
     end
 
