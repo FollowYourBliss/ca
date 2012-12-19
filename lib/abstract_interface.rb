@@ -1,3 +1,4 @@
+# encoding: utf-8
 module AbstractInterface
 
   class InterfaceNotImplementedError < NoMethodError

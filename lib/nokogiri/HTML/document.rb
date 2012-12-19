@@ -1,4 +1,4 @@
-# encodint: utf-8
+# encoding: utf-8
 module Nokogiri
   module HTML
     # Class Nokogiri::HTML::Document
@@ -8,6 +8,8 @@ module Nokogiri
         xpath('//comment()').remove
         xpath("//script").remove
         xpath("//noscript").remove
+        xpath("//style").remove
+        xpath("//link").remove
         xpath("//style").remove
       end
       # Method that return true if HTML document have only one or zero h1 tag

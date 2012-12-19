@@ -26,7 +26,7 @@ describe :Ca do
         @test.run
       end
 
-      it "Objec should be a Ca::SimilarTest object" do
+      it "Object should be a Ca::SimilarTest object" do
         @test.should be_a Ca::SimilarTest
       end
 
