@@ -13,7 +13,8 @@ module Ca
                 :text,
                 :plagiarism,
                 :problems,
-                :tag_problem_flag
+                :tag_problem_flag,
+                :nr_of_nodes
 
   ##########################################
   # Object methods
@@ -39,12 +40,11 @@ module Ca
       end
     end
 
-    # Return all problems as symbols
-    def problems_as_sym
-      @problems.map do |problem|
-        problem.to_sym
-      end
+    # Fetch first n elements from @hash attribute
+    def first_n(number = Ca::Config.instance.phrase_to_csv)
+      @hash.first(number)
     end
+
 
     # Contructor, take +nokogiri_structure+ as HTML structure from Nokogiri gem to analyze, +phrase_lenght+ - max number of words in one phrase
     # Additionaly save +nokogiri_structure+ to Object variable @text
@@ -53,6 +53,7 @@ module Ca
       Nokogiri::HTML::NodeSpecyfication.tag_analyzer(nokogiri_structure, self)
       mark_warnings
       attributes_analyzer
+      @nr_of_nodes = Ca::NodeCounter.instance.value
       Ca::NodeCounter.instance.reset
       run_tag_analyse!
       run_position_analyse!(text_number_of_words)
@@ -61,12 +62,32 @@ module Ca
       sort_by(:value)
       plagiarism_test
       fetch_problems
+
       self
+    end
+
+    # Return all problems as symbols
+    def problems_as_sym
+      @problems.map do |problem|
+        problem.to_sym
+      end
+    end
+
+    # Return page score countet via top n phrases
+    def score
+      score = 0
+      first_n.each do |key, value|
+        score += value.value
+      end
+      if @plagiarism
+        score -= -100
+      end
+      score
     end
 
     # Return number of chars for text in object without " " and "\n"
     def text_number_of_chars
-      @test.number_of_chars
+      @text.text.number_of_chars
     end
 
     # Return number of words for text
@@ -159,11 +180,6 @@ module Ca
       @problems << Ca::MetaDescriptionProblem.new if @text.empty_meta_description?
       @problems << Ca::MetaKeywordsProblem.new if @text.empty_meta_keywords?
       @problems << Ca::TitleProblem.new if @text.empty_title?
-    end
-
-    # Fetch first n elements from @hash attribute
-    def first_n(number = Ca::Config.instance.phrase_to_csv)
-      @hash.first(number)
     end
 
     # Parse @text to HTML and save it into the tml/filename.html
