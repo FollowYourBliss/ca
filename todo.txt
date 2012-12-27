@@ -1,0 +1,8 @@
+dodać w słowniku słowo spam
+page rank
+backlinks
+outbanklinks
+uzupełnić przykłady
+
+
+Pamiętaj o nokogiri w analizie implementacji

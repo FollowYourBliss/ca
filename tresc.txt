@@ -1,0 +1,164 @@
+Wiele ludzi zajmowało się analizą wpływu treści strony na pozycję w wyszukiwarce już od ich wczesnego powstania. W literaturze i internecie możemy znaleść wskazówki jak stworzyć tekst strony, który będzie przyjazny dla robotów (małych programów), które ją badają. Należy jednak pamiętać, iż zasady te ciągle ulegają zmianą ze względu na ciągły rozkwit tej dziedziny.
+
+Poniżej znajdują się najważniejsze zagadnienia rozpatrywane podczas analizy tekstu w formacie HTML
+
+  Znacznik title
+    przykład: <title>Brand new SEO Techniques</title>
+    Najważniejszy z perspektywy analizy tag, zawiera wyświetlany tytuł naszej witryny internetowej. Słowa w nim zawarte powinny należeć do fraz/słów kluczowych tworzonej podstrony. Nie może on być pusty. To ten tytuł wyświetlany jest w wynikach wyszukiwarek internetowych i on zostanie wyświetlony w pasku nagłówka przeglądarki internetowej po wejściu na stronę. Wg. książki Shari Thurow "Pozycjonowanie w wyszukiwarkach internetowych6" tag ten powinien zawierać od 5-10 słów i maksymalnie 75 znaków. Większa wartość może spowodować, iż nasza wityryna może zostać oskarżona o spam.
+
+  Znaczniki Meta Keywords i Meta Description
+    przykład:
+    Początkowo wyszukiwarki internetowe tworząc bazę danych o stronie używały słów kluczowych zwartych w znacznikach meta keywords i meta description. Twórcy stron to zauważyli i zaczeli pozycjonowalać strony tylko na podstawie tych tagów. Doprowadziło to do takiej sytuacji, w której tagi pełne były spamu, a pozycjonowały się wyśmienicie. Toteż wyszukiwarki internetowe zaprzestały interpretowania ich zawartości zawartości podczas określania rankingu. Trzeba jednak pamiętać o ich, bo choć nie są interpretowane przez roboty to np. meta description odpowiada za opis jaki użytkownik, czyli potencjalny klient widzi pod tytułem wyszukanej strony.
+
+      przykład
+
+    Trzeba także nadmienić, iż niektóre wyszukiwarki dalej interpretują te tagi.
+    Jako ciekawostkę można dodać, iż jeżeli wyszukiwarka google nie znajdzie meta description to generuje go sobie sama na podstawie zawartości strony i umieszcza w wynikach wyszukiwania.
+
+  Znaczniki nagłówków
+    Znaczniki nagłówków w HTML-u to tagi o nazwach: h1, h2, h3, h4 itp. Kolejne liczby oznaczają kolejny podtytuł. Są to bardzo znaczące znaczniki z perspektywy określania wagi frazy. Im mniejsza cyfra przy literze "h" tym większe znaczenie dla tekstu. Przyjeło się, iż znacznik najsilniejszy - czyli "h1" może wystąpić w tekście strony tylko raz.
+
+  Opis alternatywny obrazku
+    Znacznik <img> (służący do wyświetlania obrazków) posiada atrybut alt - określający alternatywny opis obrazka. Jest on o tyle ważny, iż wyświetlany jest po najechaniu kursorem na obrazek lub wyświetlany zamiast obrazka w momencie kiedy ten nie może być załadowany. Dodatkowo znacznik <img> musi mieć uzupełniony atrybut scr (ścierzkę do obrazka) oraz atrybut title.
+
+      przykłąd
+
+  Anchor tekst
+    Tag <a></a>, który służy do tworzenia linków również ma kilka założeń. Jego zawartość nie może być pusta - jeżeli jest to użytkownik nie ma możliwości skorzystania z niego. Powienien mieć uzupełniony atrubut href (adres docelowy) oraz atrybut title.
+
+
+  Wyróżnienie poprzez tagi
+    Tagie tagi zmieniające wygląd tekstu takie jak <strong>, <em>, <b> wg. Tomasza Frontczaka ("Marketing Intenetowy"), cytuje: "(...) mają pewien minimalny wpływ na ranking, ich użycie powinno być jednak warunkowane koniecznością przejrzystości tekstu, a nie wypływaniem na algorytm", toteż zabrane są pod uwagę jednak nie z taką siłą jak znacznik title i nagłówki.
+
+
+  Unkalność tekstu
+    Trzeba pamiętać, żeby nasz tekst był unikatowy w skali Internetu. Na przykład strony, które są kopiami artukułów z internetowych encyklopedii mają niski page rank.
+
+
+
+Dostępne narzędzia
+Podczas analizy tematu dokonany został rekonesans dostępnych narzędzi do analizy tekstu.
+
+  http://kingdomkeys.info/seoValidator.php
+
+    screen
+
+    Strona pozwala na wprowadzenie adresu URL naszej witryny i dokonuje analizy pod kilkoma względami takimi jak: wystąpienie tagów url, title, h1, h2, h3, wyróżnienia, img (z alternatywnym opisem), linków przychodzących, linków wychodzących oraz pokrycia słowem kluczowym wpisanym w formularzu.
+    Na tej podstawie generuje procentowy wynik.
+
+    screen
+
+    Narzędzie jest proste i zwraca uwagę na ważne elementy. Zgłasza np. przesycenie tekstu słowem kluczowym lub za krótką zawartość tagu title. Jego słabą stroną jest to, iż ogranicza się tylko do jednego słowa kluczowego.
+
+
+  http://www.webconfs.com/keyword-density-checker.php
+
+    screen
+
+    Tak samo jak poprzedniczka pozwala na wprowadzenie adresu URL i dokonuje analizy. Wynikiem analizy jest chmura słów kluczowych. Wygląda ona następująco dla http://rubyonrails.pl/:
+
+    screen
+
+    W obrazowy sposób pokazuje najważniejsze słowa kluczowe, które są pokwiększone. Dodatkowo strona stworzy tabelę najważniejszych słów wraz z ilością ich wystąpień oraz procentowym pokryciem tekstu.
+
+    screen
+
+    Wadą narzędzia jest to, iż podczas analizy bierze pod uwagę tylko frazy składające się wyłącznie z jednego słowa.
+
+  http://www.seochat.com/seo-tools/keyword-density/
+
+    screen
+
+    Narzędzie już przed analizą pyta użytkownika o kilka istotnych rzeczy takich jak:
+      czy w wynikach mają być zawarte tagi meta, opisy alternatywne i tytuł
+      czy brać pod uwagę liczby
+      jak długie frazy ma analizować
+      ile wyników wyświetlić
+
+    Po wpisaniu adresu URL i zatwierdzeniu, pojawiają się wyniki analizy w formie tabeli:
+
+    screen
+
+    prezentuje ona tak samo jak we wcześniejszym narzędziu frazy (tym razem już złuższe niż jedno słowo) wraz z ilością ich wystąpień i pokryciem procentowym. Frazy są wyświetlane od najbardziej znaczących do najmniej.
+    Strona ma natomiast problemy z polskimi znakami. Słowo "społeczności" zostało zamienione na frazę trójwyrazową "spo eczno ci"
+
+
+
+Czy więcej?
+
+
+Wybrane techonogie.
+  Podczas pracy użyty został język programowania Ruby. Język ten staje się coraz bardziej popularny w środowiskach ludzi zajmujacych się tworzeniem stron internetowych, ze względu na słój framework - Ruby on Rail. Pozwala on na bardzo szybkie tworzenie zaawansowanych serwisów i platform e-commerse. Sam Ruby jest językiem skryptowym dostępnym obecnie na platfomy GNU/Linux, Mac OS i Microsoft Windows. Składnia jest prosta i nastawiona na pisanie kodu bez konieczności użycia komentarzy. Ruby jest dynamicznie typowany, co onzacza brak konieczość deklarowania typów zmiennej przed jej uzyciem. Jest w pełni obiektowy tzn. każda wartość jest obiektem jakiejś klasy - np. liczba 5 jest obiektem klasy Fixnum.
+  Dla Ruby storzony został mechanizm tworzenia bibliotek zależnych mających nazwę "gem". Istanieje wiele gemów, które są dostępne na licencjach OpenSource. Kilka z nich zostało wykorzystanych podczas tworzenia projektu. Do najważniejszych należą:
+    Nokogiri, Mechanize, Reek, RSpec
+
+
+    Nokogiri - gem odpowiedzialny za pasowanie (+++++++++adnotacja) struktury HTML na strukturę węzłów (z ang. node), najważniejszy gem w całym projekcie. Dzięki niemu nie trzeba było dokonywać analizy struktury niskopoziomowej tekstu pisanego w języku znaczników. Jego struktury danych oferują wiele gotowych rozwiązań, takich jak usuwanie całych węzłów lub dodawanie do struktury dodatkowych. Opis przykładowej struktury zostanie przedstawiony w następnym podrozdziale.
+
+    Mechanize - gem odpowiedzialny automatyczną interakcję z witrynami intenetowymi. Podszywając się pod użytkownika, jest w stanie wypełnić fomularz i odczytać wyniki, które parsuje na struktury Nokogiri.
+
+    Reek - gem odpowiedzialny wyszukiwanie tzn. "śmierdzących" fragmentów kodu w celu ich refaktoryzacji
+
+    RSpec - gem odpowiedzialny za testowanie, posiada bardzo przyjazną składnie zbliżoną do języka angielskiego.
+
+Hahahaha
+Implementacja
+
+  Biblioteka standardowa Ruby oferuje trzy bardzo przydatne typy danych są to Symbol, Array i Hash
+
+    Symbol - to reprezentacja ciągu znakowego w postaci identyfikatora, identyfikatof ten ma swój indywidualny numer w pamięci i jest on stały podczas pracy skryptu. Dzięki temu nie tworzymy nowych obiektów typu String tylko operujemy na tych samych symbolach.
+    Symbole tworzy się następująco:
+      "sample".to_sym
+    Wygląd przykładowego symbolu:
+      :sample
+
+
+    Array - oferuje funkcjonalność tablicy indeksowanej, z tym że pojedynczym elementem może byc dowolny obiekt. Sam obiekt glówny może zachowywać się jak lista, kolejka czy stos (umożliwia stosowanie metod pop, push, first, last, next)
+
+    [6] pry(main)> [1,2,3,5].first.next
+    => 2
+
+    Hash - tablica asocjacyjna (kolekcja kuczy i wartości), oferuje podobne funkcjonalności co obiekty klasy Array. Pozwala ona na łatwe przyporządkowanie kluczom ich właściwości. Jako kuczy przyjeło się uzywać symboli.
+
+    [10] pry(main)> hash = {elem1: 1, elem2: 22, elem3: 333}
+    => {:elem1=>1, :elem2=>22, :elem3=>333}
+    [11] pry(main)> hash.first
+    => [:elem1, 1]
+
+
+
+  Stuktury Nokogiri
+    Biblioteka Nokogiri umożliwia w łatwy sposób parsowanie tekstu HTML do swoich stuktur danych. Wystarczy do konstruktora Nokogiri::HTML przekazać tekst w formie języka znaczników. Otrzymujemy w ten sposób obiekt Nokogiri::HTML::Document. Jest to stuktura drzewiasta, po której możemy się poruszać metodami obiektu.
+    Najważniejszą z perspektywy analizy jest metoda children, która w postaci obiektu Array zwraca potomków węzła.
+
+
+    screen
+
+
+  Przystąpienie do analizy
+    Najbardziej zewnętrzną klasą tworzonego gemu jest Ca::Analyse. Jej kontruktor wygląda następująco:
+
+    def initialize(text, phrase_length = Ca::Config.instance.phrase_length)
+      nokogiri_structure = Nokogiri::HTML(text)
+      nokogiri_structure.remove_unnecessary
+      @description = Ca::Description.new(nokogiri_structure, phrase_length)
+      self
+    end
+
+    Przekazujemy mu dwie wartości:
+      - text - ciąg znakowy w języku HTML
+      - phrase_length - maksumalna długość frazy (jeżeli nie przekażemy go to pobierana jest z Singletona Ca::Config)
+
+    Z perspektywy analizy nie potrzebujemy analizy następujących tagów:
+      - style - przechowujących wewnętrzne kaskadowe arkusze stylów (CSS)
+      - script - przechowujących skrypty w JavaScript
+      - link - przechowujących ścieżki do zewnętrznych plików CSS
+      - komentarzy HTML
+      - noscript - przechowującego alternatywę dla użytkowników, którzy nie mają włączonego JavaScript
+
+    Konstuktor parsuje tekst HTML oraz usuwa z niego niepotrzebe tagi metodą remove_unnecessary. Następnie przekazyje strukture Nokogiri do konstruktora najważniejszej klassy - Ca::Description
+
+    Konstruktor Ca::Description wykonuje całej analizy
+
+
+
