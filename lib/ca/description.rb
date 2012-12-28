@@ -85,6 +85,23 @@ module Ca
       score
     end
 
+    # Create Hash of most valuable information about description
+    # useful to parse it to web application
+    def result
+      {
+        problems: problems,
+        text: text,
+        best_phrases: Hash[first_n],
+        nr_of_chars: text_number_of_chars,
+        nr_of_words: text_number_of_words,
+        nr_of_nodes: nr_of_nodes,
+        score: score,
+        plagiarism: plagiarism,
+        html: text.to_s.force_encoding("UTF-8"),
+        tags_problem: tag_problem_flag
+      }
+    end
+
     # Return number of chars for text in object without " " and "\n"
     def text_number_of_chars
       @text.text.number_of_chars
@@ -292,8 +309,8 @@ module Ca
 
     # Check every hash value by run correct_tags? on it, throw exeption
     def check_harmony
-      @hash.each_value do |value|
-          value.correct_tags?
+      @hash.each do |key, value|
+            value.correct_tags? key
       end
     end
 

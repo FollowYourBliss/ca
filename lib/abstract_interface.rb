@@ -1,6 +1,6 @@
 # encoding: utf-8
 module AbstractInterface
-
+  # Class AbstractInterface::InterfaceNotImplementedError
   class InterfaceNotImplementedError < NoMethodError
   end
 
@@ -31,6 +31,7 @@ module AbstractInterface
         end
       end
     end
+
   end
 
 end

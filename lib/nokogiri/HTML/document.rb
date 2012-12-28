@@ -11,6 +11,7 @@ module Nokogiri
         xpath("//style").remove
         xpath("//link").remove
         xpath("//style").remove
+        xpath('//processing-instruction()').remove
       end
       # Method that return true if HTML document have only one or zero h1 tag
       # return false if there are more than 1 h1 tag
