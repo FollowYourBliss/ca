@@ -65,7 +65,8 @@ module Ca
         agent = Mechanize.new
         page = agent.get("http://www.google.com")
         page.encoding = 'utf-8'
-        page.form_with(name: "f").field_with(name: "q").value = phrase
+        search_form = page.form_with(name: "f")
+        search_form.field_with(name: "q").value = phrase
         agent.submit(search_form)
     end
 
