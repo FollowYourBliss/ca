@@ -6,3 +6,8 @@ uzupełnić przykłady
 
 
 Pamiętaj o nokogiri w analizie implementacji
+
+
+
+pamietaj o problemach z kodowaniem przy mechanize
+o tym że chciał rzutować na kodowanie strony google czyli ISO-8859-2
