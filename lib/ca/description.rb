@@ -58,7 +58,7 @@ module Ca
       run_tag_analyse!
       run_position_analyse!(text_number_of_words)
       clean!
-      # check_harmony
+      check_harmony
       sort_by(:value)
       plagiarism_test
       fetch_problems
@@ -309,8 +309,8 @@ module Ca
 
     # Check every hash value by run correct_tags? on it, throw exeption
     def check_harmony
-      @hash.each_value do |value|
-          value.correct_tags?
+      @hash.each do |key, value|
+            value.correct_tags?
       end
     end
 
