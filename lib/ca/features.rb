@@ -34,12 +34,12 @@ module Ca
     end
 
     # Method that raise exeption if any of @weigths is incorrect - doesn't end with :document tag
-    def correct_tags?
+    def correct_tags?(key)
       @weights.each do |tags|
         last_tag = tags.last
         if last_tag != :title
           if last_tag != :document
-            raise Ca::Exceptions::IncompleteTags.new("Problem with incomplete tags")
+            raise Ca::Exceptions::IncompleteTags.new("Problem with incomplete tags near text: #{key}")
           end
         end
       end

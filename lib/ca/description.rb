@@ -310,7 +310,7 @@ module Ca
     # Check every hash value by run correct_tags? on it, throw exeption
     def check_harmony
       @hash.each do |key, value|
-            value.correct_tags?
+            value.correct_tags? key
       end
     end
 
