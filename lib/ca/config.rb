@@ -34,8 +34,9 @@ module Ca
       @excluded = []
       # specyfy max number of nodes , if NodeCounter pass them than raise exeption
       @max_nr_of_nodes = 5000
-
+      # Load numerical value for every tag
       load_powers()
+      # load all excluded words
       load_all_excluded()
     end
 

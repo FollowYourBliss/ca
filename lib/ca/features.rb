@@ -24,8 +24,6 @@ module Ca
   ##########################################
   # Object methods
   ##########################################
-
-
     # Return true if any warning in warning Object field is set to true
     #   @warning = [[true, true, true], [true, false]] #=> true
     #   @warning = [[false, false], [false, false]] #=> false
