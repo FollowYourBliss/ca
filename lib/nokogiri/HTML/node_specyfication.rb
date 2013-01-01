@@ -48,15 +48,12 @@ module Nokogiri
         along_childrens(node.children, description, tag)
         single_node(node, tag, description)
         node.surround if tag == :text
-
       end
   ##########################################
   # Private methods
   ##########################################
     private
       # Loop along all childrens
-      # Remember not to refactor this method, you can't use text = child.text
-      # couse there is a problem with recursion
       def self.along_childrens(childrens, description, tag)
         childrens.each do |child|
           tag_analyzer(child, description, tag)
