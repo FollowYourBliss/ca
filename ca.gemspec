@@ -30,4 +30,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "gruff"
   gem.add_dependency "rmagick"
   gem.add_dependency "activesupport"
+  
 end

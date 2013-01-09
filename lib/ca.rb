@@ -25,7 +25,6 @@ require "ca/text_analitics"
 require "ca/version"
 require "ca/warning"
 
-
 require "ca/exceptions/img_warnings"
 require "ca/exceptions/link_warnings"
 require "ca/exceptions/tag_warnings"
